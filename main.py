@@ -1,54 +1,49 @@
-import cv2
-from keras.models import load_model
+import tensorflow as tf
 import numpy as np
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
+from tensorflow.keras.models import load_model
+import os
 import matplotlib.pyplot as plt
-from math import sqrt
+
+# Constants
+IMAGE_SIZE = 224
+MODEL_PATH = 'my_model.h5' 
+TEST_IMAGE_DIR = 'D:\\Final Year Project\\images\\testing' 
+CLASSES = ['Acne', 'Actinic Keratosis', 'Basal Cell Carcinoma', 'Eczema', 'Rosacea'] 
+
+# Load the trained model
+model = load_model(MODEL_PATH)
+
+# preprocess the image
+def preprocess_image(image_path):
+    """Load and preprocess an image."""
+    img = load_img(image_path, target_size=(IMAGE_SIZE, IMAGE_SIZE))
+    img = img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img /= 255.0
+    return img
+
+#predict 
+def predict_condition(image_path):
+    """Predict the skin condition of a given image."""
+    img = preprocess_image(image_path)
+    prediction = model.predict(img)
+    predicted_class = CLASSES[np.argmax(prediction)]
+    return predicted_class
 
 
+# Testing the model with test images
+for condition_dir in os.listdir(TEST_IMAGE_DIR):
+    condition_path = os.path.join(TEST_IMAGE_DIR, condition_dir)
+    if os.path.isdir(condition_path):
+        for image_file in os.listdir(condition_path):
+            image_path = os.path.join(condition_path, image_file)
+            predicted_class = predict_condition(image_path)
+            print(f"Image: {image_file} - Predicted Condition: {predicted_class}")
 
-# Load the pre-trained model
-model = load_model('my_model.h5')
+            # Display the image with the predicted label
+            img = load_img(image_path)
+            plt.imshow(img)
+            plt.title(f"Predicted Condition: {predicted_class}")
+            plt.show()
 
-# Haar Cascade for face detection
-haar_file = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
-face_cascade = cv2.CascadeClassifier(haar_file)
-
-# Function to preprocess the image
-def preprocess_image(image):
-    processed_image = cv2.resize(image, (48, 48))
-    processed_image = np.array(processed_image).reshape(1, 48, 48, 1)
-    return processed_image / 255.0
-
-# Labels for the diseases
-labels = {0: 'Acne', 1: 'Actinic Keratosis', 2: 'Basal Cell Carcinoma', 3: 'Eczema', 4: 'Rosacea'}
-
-# Starting the webcam
-webcam = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = webcam.read()
-    if not ret:
-        break
-
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-    for (x, y, w, h) in faces:
-        face_img = gray[y:y+h, x:x+w]
-        preprocessed = preprocess_image(face_img)
-
-        # Predicting the disease
-        prediction = model.predict(preprocessed)
-        disease_label = labels[np.argmax(prediction)]
-
-        # Drawing a rectangle and putting text
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
-        cv2.putText(frame, disease_label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
-
-    cv2.imshow('Skin Disease Detection', frame)
-
-    if cv2.waitKey(27) & 0xFF == ord('q'):
-        break
-
-webcam.release()
-cv2.destroyAllWindows()
