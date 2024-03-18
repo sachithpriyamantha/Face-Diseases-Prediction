@@ -1,0 +1,16 @@
+{
+    "offices": [
+       
+        {
+            "address": "E. W. Perera mawatha,\n Colombo 10,\n Sri Lanka",
+            "id": "Colombo, Sri Lanka",
+            "image": "https://lh3.googleusercontent.com/gG1zKXcSmRyYWHwUn2Z0MITpdqwb52RAEp3uthG2J5Xl-4_Wz7_WmoM6T_TBg6Ut3L1eF-8XENO10sxVIFdQHilj8iRG29wROpSoug",
+            "lat": 	6.919144,
+            "lng": 79.868027,
+            "name": "Colombo Hospital",
+            "phone": "",
+            "region": "asia"
+         }         
+
+    ]
+    }
