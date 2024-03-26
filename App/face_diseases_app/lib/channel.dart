@@ -247,38 +247,7 @@ class _HomePageState extends State<HomePage> {
             ])
           ]),
 
-          
-          /*GestureDetector(
-            onTap: () {
-              setState(() {
-                user.isFollowedByMe = !user.isFollowedByMe;
-              });
-              
-            },
-            child: AnimatedContainer(
-                height: 35,
-                width: 110,
-                duration: Duration(milliseconds: 300),
-                decoration: BoxDecoration(
-                    color:
-                        user.isFollowedByMe ? Colors.redAccent : Color(0xfffff),
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: user.isFollowedByMe
-                          ? Colors.transparent
-                          : Colors.black45,
-                    )),
-                child: Center(
-                    child: Text(
-                        user.isFollowedByMe ? 'Info' : 'Info',
-                        style: TextStyle(
-                            color: user.isFollowedByMe
-                                ? Colors.white
-                                : Colors.black54)
-                                ),
-                                ),
-                                ),
-          )*/
+
           GestureDetector(
             onTap: () {
               showModalBottomSheet(
