@@ -30,73 +30,114 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR(MRS) P. SENAKA',
         'Hambantota Hospital',
+        
         'https://i1.rgstatic.net/ii/profile.image/751258864480260-1556125479393_Q512/Indira-Kahawita.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
     User(
         'DR S. ABEYKEERTHI',
         'Anuradhapura Hospital',
+        
         'https://groundviews.org/wp-content/uploads/2012/08/Screen-Shot-2012-08-27-at-11.37.32-PM.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
 
     User(
         'DR UWAYSE AHAMED',
         'Colombo Hospital',
+ 
         'https://www.happysrilankans.com/wp-content/uploads/2020/11/Dr.-Uvais-Ahamed.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
     User(
         'DR JANAKA AKARAWITA',
         'Colombo Hospital',
+         
         'https://s3-us-west-1.amazonaws.com/co-directory-images/janaka-akarawita-6bb12843.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
     User(
         'DR P. AKURUGODA',
         'Galle Hospital',
+       
         'https://ochrehealth.com.au/wp-content/uploads/2020/08/Dr-Chameera-Akurugoda-400x400.jpeg',
-        false),
-    User('DR D.M AMARATHUNGA', 'Matara Hospital',
-        'https://docplayer.net/docs-images/90/101512065/images/5-4.jpg', false),
-    User('DR D. ARIYAWANSA', 'Ambalantoa Hospital',
-        'https://i.ytimg.com/vi/IZYZJfqdvq8/maxresdefault.jpg', false),
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
+    User('DR D.M AMARATHUNGA',
+        'Matara Hospital',
+     
+        'https://docplayer.net/docs-images/90/101512065/images/5-4.jpg',
+        'hi my name is doctor i works general hsoptilat',
+        false
+        ),
+    User('DR D. ARIYAWANSA',
+          'Ambalantoa Hospital',
+  
+        'https://i.ytimg.com/vi/IZYZJfqdvq8/maxresdefault.jpg',
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR G. ARSECULERATNE',
         'Gampaha Hospital',
+        
         'https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.ft.lk/assets/uploads/image_dcdad01ce0.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR D. BANDARA',
         'Mathale Hospital',
+     
         'https://umanitoba.ca/agricultural-food-sciences/sites/agricultural-food-sciences/files/styles/3x2_900w/public/2021-02/fhns-nandika-bandara.jpg',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR MAHINDA DE SILVA',
         'Gampaha Hospital',
+     
         'https://images.unsplash.com/photo-1541710430735-5fca14c95b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR UPENDRA DE SILVA',
         'Gampaha  Hospital',
+         
         'https://images.unsplash.com/photo-1542534759-05f6c34a9e63?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR MANEL DISSANAYAKE',
         'Nugegoda  Hospital',
+ 
         'https://images.unsplash.com/photo-1516239482977-b550ba7253f2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR D.M.S DISSANAYAKE',
         'Matara  Hospital',
+      
         'https://images.unsplash.com/photo-1542973748-658653fb3d12?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR S. EKANAYAKA',
         'Galle Hospital',
+     
         'https://images.unsplash.com/photo-1569443693539-175ea9f007e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
     User(
         'DR(MRS) S FELECIA',
         'Karapitiya Hospital',
+   
         'https://images.unsplash.com/photo-1541710430735-5fca14c95b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-        false),
+        'hi my name is doctor i works general hsoptilat',false
+        ),
   ];
 
   List<User> _foundedUsers = [];
@@ -207,11 +248,12 @@ class _HomePageState extends State<HomePage> {
           ]),
 
           
-          GestureDetector(
+          /*GestureDetector(
             onTap: () {
               setState(() {
                 user.isFollowedByMe = !user.isFollowedByMe;
               });
+              
             },
             child: AnimatedContainer(
                 height: 35,
@@ -228,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                     )),
                 child: Center(
                     child: Text(
-                        user.isFollowedByMe ? 'Channeled' : 'Info',
+                        user.isFollowedByMe ? 'Info' : 'Info',
                         style: TextStyle(
                             color: user.isFollowedByMe
                                 ? Colors.white
@@ -236,10 +278,61 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 ),
                                 ),
-          )
-          
-        ],
-      ),
-    );
+          )*/
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    padding: EdgeInsets.all(10.0),
+                    height: 200, // Adjust the height as needed
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          //'Doctors Details',
+                          ' ${user.name}',
+                          style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Divider(),
+                        Text('Doctor Name: ${user.name}'),
+                        Text('Hospital: ${user.username}'),
+                        // Text('Contact Number: ${user.contact}'),
+                        //Text('Followers: ${user.followersCount}'),
+                        Text('Infomation: ${user.info}'),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: AnimatedContainer(
+                height: 35,
+                width: 110,
+                duration: Duration(milliseconds: 300),
+                decoration: BoxDecoration(
+                color: user.isFollowedByMe ? Color.fromARGB(255, 66, 58, 151) : Colors.white,
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                color: user.isFollowedByMe ? Colors.transparent : Colors.black45,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  'Info',
+                  style: TextStyle(
+                    color: user.isFollowedByMe ? Color.fromARGB(255, 62, 75, 177) : Colors.black54,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
-}
