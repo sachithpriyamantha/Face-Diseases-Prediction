@@ -49,7 +49,13 @@ dependencies:
   bubble: ^1.2.1
   percent_indicator: ^4.2.3
   flutter_bloc: ^8.1.4
-
+  awesome_dialog: ^3.2.0
+  flutter_offline: ^3.0.1
+  flutter_screenutil: ^5.9.0
+  gap: ^3.0.1
+  font_awesome_flutter: ^10.7.0
+  carousel_slider: ^4.2.1
+  
 
 
 
@@ -93,6 +99,7 @@ flutter:
   - assets/locations.json
   - assets/model.tflite
   - assets/labels.txt
+  - assets/login_animation.riv
 
 
   #   - images/a_dot_ham.jpeg

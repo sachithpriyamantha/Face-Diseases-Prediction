@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1072306408314",
+    "project_id": "facediseasesapp-635d0",
+    "storage_bucket": "facediseasesapp-635d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072306408314:android:a86e528b0a7f04c8aae4c3",
+        "android_client_info": {
+          "package_name": "com.example.face_diseases_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAohS9uoxVUzyYUw4Z-8JqGM1H99RAEscE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
