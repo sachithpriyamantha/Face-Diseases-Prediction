@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             extendBody: true,
 
         
-/****************************************Body************************************/
+
       body: OfflineBuilder(
         
         connectivityBuilder: (

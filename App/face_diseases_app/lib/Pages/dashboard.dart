@@ -6,6 +6,7 @@ import 'package:face_diseases_app/Pages/video.dart';
 import 'package:flutter/material.dart';
 
 import 'about.dart';
+import 'chat.dart';
 import 'face_diseases.dart';
 import 'nearbyclinic.dart';
 import 'scan.dart';
@@ -231,6 +232,10 @@ class Dashboard extends StatelessWidget {
 
                           else if (titles[index] == "About") {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutPage()),
+                              );
+                          }
+                          else if (titles[index] == "Chat") {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen()),
                               );
                             }
                             else if (titles[index] == "Doctors") {
