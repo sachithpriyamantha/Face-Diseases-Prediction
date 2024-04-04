@@ -1,10 +1,13 @@
+import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/widgets/app_text_button.dart';
 import '../../../core/widgets/no_internet.dart';
@@ -20,33 +23,64 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
+  final ImagePicker _picker = ImagePicker();
+  XFile? _imageFile;
 
+  Future<void> _pickImage() async {
+    try {
+      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        setState(() {
+          _imageFile = pickedFile;
+        });
+        await _uploadImage();
+      }
+    } catch (e) {
+      // Handle errors or cancellation
+    }
+  }
+
+  Future<void> _uploadImage() async {
+    if (_imageFile == null) return;
+    final file = File(_imageFile!.path);
+    try {
+      final ref = FirebaseStorage.instance
+          .ref('profile_images/${FirebaseAuth.instance.currentUser!.uid}/${_imageFile!.name}');
+      await ref.putFile(file);
+      final url = await ref.getDownloadURL();
+      await _updateUserProfile(url);
+    } catch (e) {
+      // Handle upload errors
+    }
+  }
+
+  Future<void> _updateUserProfile(String imageUrl) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.updatePhotoURL(imageUrl);
+      setState(() {});
+      // Optionally, show a success message or update UI accordingly
+    } catch (e) {
+      // Handle update errors
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Color.fromARGB(255, 228, 83, 254),
-      
-            appBar: AppBar(
+      appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Profile',
-          style: TextStyle(
-          color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(255, 22, 0, 147),
       ),
-
-            extendBody: true,
-
-        
-
+      extendBody: true,
       body: OfflineBuilder(
-        
         connectivityBuilder: (
           BuildContext context,
           ConnectivityResult connectivity,
@@ -65,27 +99,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   SafeArea _homePage(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 200,
-                width: 200,
-                child: FirebaseAuth.instance.currentUser!.photoURL == null
-                    ? Image.asset('image/profile.png')
-                    : FadeInImage.assetNetwork(
-                        placeholder: 'image/loading.gif',
-                        image: FirebaseAuth.instance.currentUser!.photoURL!,
-                        fit: BoxFit.cover,
-                      ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: _pickImage,
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL!) : AssetImage('image/profile.png') as ImageProvider,
+                  child: Icon(Icons.camera_alt, size: 25, color: Colors.white54),
+                ),
               ),
               Text(
-                FirebaseAuth.instance.currentUser!.displayName!,
-                style: TextStyles.font15DarkBlue500Weight
-                    .copyWith(fontSize: 30.sp),
+                user.displayName ?? 'Anonymous',
+                style: TextStyles.font15DarkBlue500Weight.copyWith(fontSize: 30.sp),
               ),
               AppTextButton(
                 buttonText: 'Sign Out',
@@ -107,19 +139,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       desc: e.toString(),
                     ).show();
                   }
-                  
                 },
-                
               ),
-              
             ],
           ),
-          
         ),
       ),
     );
   }
 }
-
-
-

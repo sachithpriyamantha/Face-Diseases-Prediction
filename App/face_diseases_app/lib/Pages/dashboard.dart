@@ -1,18 +1,17 @@
 
 
+import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
 import 'package:face_diseases_app/Pages/channel.dart';
 import 'package:face_diseases_app/Pages/video.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'about.dart';
-import 'chat.dart';
+//import 'chat.dart';
 import 'face_diseases.dart';
 import 'nearbyclinic.dart';
 import 'scan.dart';
-
-
-
 
 // ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
@@ -31,7 +30,6 @@ class Dashboard extends StatelessWidget {
     "image/profile.png",
   ];
 
-
 // list of dashbord card title
   List titles = [
     "Scan",
@@ -43,7 +41,7 @@ class Dashboard extends StatelessWidget {
     "About",
     "Profile",
   ];
-
+  
   @override
   Widget build(BuildContext context){
     height = MediaQuery.of(context).size.height;
@@ -51,7 +49,7 @@ class Dashboard extends StatelessWidget {
 
     return Scaffold(
       extendBody: true,
-     /* bottomNavigationBar: CurvedNavigationBar(
+    /* bottomNavigationBar: CurvedNavigationBar(
       
       backgroundColor: Colors.transparent,
       color: Colors.deepPurple.shade200,
@@ -72,8 +70,6 @@ class Dashboard extends StatelessWidget {
           );
         }
       ),*/
-      
-      
       
       body:SingleChildScrollView(
         child: Container(
@@ -114,15 +110,18 @@ class Dashboard extends StatelessWidget {
                       Container(
                             height: 50,
                             width: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white,
-                              image: DecorationImage(
-                              image: AssetImage(
-                                "image/download.png",
-                                )
-                              )
-                            ),
+                            
+                              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: FirebaseAuth.instance.currentUser!.photoURL == null
+                    ? Image.asset('image/profile.png')
+                    : FadeInImage.assetNetwork(
+                        placeholder: 'image/loading.gif',
+                        image: FirebaseAuth.instance.currentUser!.photoURL!,
+                        fit: BoxFit.cover,
+                      ),
+              ),
+                            
                           ),
                         ],
                       ),
@@ -136,7 +135,7 @@ class Dashboard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Hi, Sachith",
+                              "Hi, ${FirebaseAuth.instance.currentUser!.displayName}",
                               style: TextStyle(
                               fontSize: 30,
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -187,7 +186,6 @@ class Dashboard extends StatelessWidget {
                         ),
                       ),
 
-
                       //height: height,
                       width: width ,
                       padding: EdgeInsets.only(bottom: 20),
@@ -207,7 +205,7 @@ class Dashboard extends StatelessWidget {
                                 onTap: () async{ //Details of the card clicked
 
                                 
-                          // push pages
+                          /***********************************************push pages*****************************************/
                           
                             if (titles[index] == "Face Diseases") {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => FaceDiseasesPage()));
@@ -235,9 +233,17 @@ class Dashboard extends StatelessWidget {
                               );
                           }
                           else if (titles[index] == "Chat") {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen()),
-                              );
-                            }
+                            final user = FirebaseAuth.instance.currentUser; // Get the current user
+                            if (user != null) {
+                              // Navigate to the Chat screen if the user is not null
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Chat(user: user)));
+                              }
+                              else {
+                                // Handle the case where there is no user logged in
+                                print("No user logged in"); // Consider showing a message or redirecting to the login screen
+                                }
+                              }
+
                             else if (titles[index] == "Doctors") {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChannelPage()),
                               );
@@ -322,97 +328,3 @@ class Dashboard extends StatelessWidget {
 
 
 
-
-/*class Dashboard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
-    List<Map<String, dynamic>> options = [
-      {"icon": Icons.camera, "title": "Scan", "page": ScanPage()},
-      {"icon": Icons.face, "title": "Face Diseases", "page": FaceDiseasesPage()},
-      {"icon": Icons.local_hospital, "title": "Near By Clinic", "page": NearByClinicPage()},
-      {"icon": Icons.video_library, "title": "Learn Videos", "page": YoutubeVideoListScreen (videos: youtubeVideos)}, // Add necessary parameters
-      {"icon": Icons.message, "title": "Chat", }, // Assume you have a ChatPage
-      {"icon": Icons.info, "title": "About", "page": AboutPage()},
-      {"icon": Icons.person, "title": "Profile", }, // Assume you have a ProfilePage
-    ];
-
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 235, 245),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 30),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.sort, color: Colors.white, size: 30),
-                      CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/profile.png"), // Update with correct asset
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Text("Welcome!", style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 8),
-                  Text("Scan Your Diseases", style: TextStyle(color: Colors.white70, fontSize: 18)),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(20),
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: (width / 2) / (height / 4),
-                ),
-                itemCount: options.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => options[index]['page'])),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(options[index]['icon'], size: 50, color: Colors.blueGrey),
-                          SizedBox(height: 10),
-                          Text(options[index]['title'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/

@@ -102,6 +102,16 @@ class ChatScreen extends StatelessWidget {
   }
 }*/
 
+
+
+
+
+
+
+
+
+
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +121,16 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return Scaffold(
+        body: Center(
+          child: Text('No user is logged in'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Group Chat'),
@@ -143,9 +162,8 @@ class ChatScreen extends StatelessWidget {
                     final messageData = messages[index].data() as Map<String, dynamic>;
                     return MessageBubble(
                       message: messageData['message'],
-                      isMe: user!.uid == messageData['senderId'],
+                      username: messageData['senderName'], // Display sender name
                       key: ValueKey(messages[index].id),
-                      username: messageData['senderName'],
                     );
                   },
                 );
@@ -174,13 +192,13 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
-  void _sendMessage(User? user) {
+  void _sendMessage(User user) {
     final messageText = _messageController.text.trim();
-    if (messageText.isNotEmpty && user != null) {
+    if (messageText.isNotEmpty) {
       FirebaseFirestore.instance.collection('messages').add({
         'message': messageText,
         'senderId': user.uid,
-        'senderName': user.email, // Consider using a more user-friendly name, if available
+        'senderName': user.email, // Using email as the sender name
         'timestamp': FieldValue.serverTimestamp(),
       });
       _messageController.clear();
@@ -192,48 +210,37 @@ class MessageBubble extends StatelessWidget {
   const MessageBubble({
     Key? key,
     required this.message,
-    required this.isMe,
     required this.username,
   }) : super(key: key);
 
   final String message;
-  final bool isMe;
   final String username;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: isMe ? Colors.grey[300] : Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-              bottomLeft: !isMe ? Radius.circular(0) : Radius.circular(12),
-              bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
-            ),
-          ),
-          width: 140,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-          margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          child: Column(
-            crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                username,
-                style: TextStyle(fontWeight: FontWeight.bold, color: isMe ? Colors.black : Colors.white),
-              ),
-              Text(
-                message,
-                style: TextStyle(color: isMe ? Colors.black : Colors.white),
-                textAlign: isMe ? TextAlign.end : TextAlign.start,
-              ),
-            ],
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: BorderRadius.circular(12),
         ),
-      ],
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              username,
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            ),
+            Text(
+              message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
+*/
