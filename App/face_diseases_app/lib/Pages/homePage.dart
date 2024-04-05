@@ -71,17 +71,17 @@ class HomeContent extends StatelessWidget {
   
 final List<Map<String, dynamic>> carouselItems = [
     {
-      'image': 'image/learn.png', // Ensure images are in the assets folder
+      'image': 'image/facelearn.webp', // Ensure images are in the assets folder
       'text': 'Learn Face Diseases',
       'color': Colors.blue // Each item can have a specific theme color
     },
     {
-      'image': 'image/diseases.png',
+      'image': 'image/effect.jpg',
       'text': 'Communicate Effectively',
       'color': Colors.green
     },
     {
-      'image': 'assets/images/explore.jpg',
+      'image': 'image/ex.jpg',
       'text': 'Explore Resources',
       'color': Colors.orange
     },
@@ -199,3 +199,6 @@ final List<Map<String, dynamic>> carouselItems = [
     );
   }
 }
+
+
+

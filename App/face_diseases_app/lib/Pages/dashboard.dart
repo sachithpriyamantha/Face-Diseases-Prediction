@@ -146,7 +146,7 @@ class Dashboard extends StatelessWidget {
                         
                             SizedBox(height: 1),
                               Text(
-                                "Scan Your Diseases",
+                                "How can we help you?",
                                 style: TextStyle(
                                 fontSize: 25,
                                 color: Color.fromARGB(255, 255, 255, 255),
