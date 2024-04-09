@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR JANAKA AKARAWITA',
         'Colombo Hospital',
-         
+        
         'https://s3-us-west-1.amazonaws.com/co-directory-images/janaka-akarawita-6bb12843.jpg',
         'hi my name is doctor i works general hsoptilat',
         false
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR P. AKURUGODA',
         'Galle Hospital',
-       
+      
         'https://ochrehealth.com.au/wp-content/uploads/2020/08/Dr-Chameera-Akurugoda-400x400.jpeg',
         'hi my name is doctor i works general hsoptilat',
         false

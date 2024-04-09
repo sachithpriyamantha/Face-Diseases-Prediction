@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 */
 
-/*import 'dart:io';
+import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-}*/
+}
 
 
 
@@ -524,7 +524,7 @@ Future<void> _uploadProfileImage(File image) async {
 
 
 
-import 'dart:io';
+/*import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -718,7 +718,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
-
+*/
 
 
 

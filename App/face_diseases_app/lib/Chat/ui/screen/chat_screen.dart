@@ -1,6 +1,6 @@
 //import 'package:face_diseases_app/ui/screen/home_screen.dart';
-/*import 'package:face_diseases_app/Chat/ui/widgets/message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:face_diseases_app/Chat/ui/widgets/message.dart';
 import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -62,19 +62,22 @@ class _ChatState extends State<Chat> {
 
                   List<DocumentSnapshot> docs = snapshot.data!.docs;
 
-                  List<Widget> messages = docs
-                      .map((doc) => Message(
-                            from: doc.data()['from'],
-                            text: doc.data()['text'],
-                            me: widget.user.email == doc.data()['from'],
-                          ))
-                      .toList();
+                  List<Widget> messages = docs.map((doc) {
+                    final data = doc.data() as Map<String, dynamic>?;
+                    // Use `?.` to safely access the properties, providing a fallback value if null
+                    final from = data?['from'] ?? 'Unknown';
+                    final text = data?['text'] ?? 'No message text.';
+                    return Message(
+                      from: from,
+                      text: text,
+                      me: widget.user.email == from,
+                    );
+                  }).toList();
 
                   return ListView(
                     controller: scrollController,
                     children: <Widget>[
                       ...messages,
-
                     ],
                   );
                 },
@@ -156,12 +159,11 @@ class _ChatState extends State<Chat> {
       );
     }
   }
-  
+
   RaisedButton({required Text child, required Null Function() onPressed}) {}
-}
-*/
+}*/
 
-
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:face_diseases_app/Chat/ui/widgets/message.dart'; // Ensure this path is correct
 import 'package:face_diseases_app/Pages/dashboard.dart'; // Ensure this path is correct
@@ -297,5 +299,180 @@ class _ChatState extends State<Chat> {
         duration: const Duration(milliseconds: 300),
       );
     }
+  }
+}
+
+*/
+
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:face_diseases_app/Chat/ui/widgets/message.dart'; // Ensure this path is correct
+import 'package:face_diseases_app/Pages/dashboard.dart'; // Ensure this path is correct
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
+
+class Chat extends StatefulWidget {
+  static const String id = "Chat";
+  final User user;
+
+  const Chat({Key? key, required this.user}) : super(key: key);
+
+  @override
+  _ChatState createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+  final CollectionReference _messageCollectionRef =
+      FirebaseFirestore.instance.collection('messages');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController messageController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Menu'),
+            ),
+            ListTile(
+              title: Text('Log out'),
+              onTap: () async {
+                await _auth.signOut();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Dashboard()));
+              },
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text("Group Chat"),
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _messageCollectionRef.orderBy('date').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return Center(child: CircularProgressIndicator());
+
+                  List<DocumentSnapshot> docs = snapshot.data!.docs;
+                  List<Widget> messages = docs.map((doc) {
+                    Map<String, dynamic>? data =
+                        doc.data() as Map<String, dynamic>?;
+                    if (data != null) {
+                      return Message(
+                        from: data['from'] ?? 'Unknown',
+                        text: data['text'] ?? '',
+                        imageUrl: data[
+                            'imageUrl'], // Assuming Message widget can handle nullable imageUrl
+                        me: widget.user.email == data['from'],
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
+                  }).toList();
+
+                  return ListView(
+                    controller: scrollController,
+                    children: messages,
+                  );
+                },
+              ),
+            ),
+            _buildInput(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInput() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      height: 50.0,
+      decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+          color: Colors.white),
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.image),
+            onPressed: _pickImage,
+            color: Colors.blue,
+          ),
+          Expanded(
+            child: TextField(
+              controller: messageController,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Type your message...',
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: () => _sendMessage(text: messageController.text),
+            color: Colors.blue,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      _uploadImage(File(image.path));
+    }
+  }
+
+  Future<void> _uploadImage(File image) async {
+    String fileName = Uuid().v1();
+    var storageRef =
+        FirebaseStorage.instance.ref().child("chat_images/$fileName");
+
+    try {
+      await storageRef.putFile(image);
+      String downloadURL = await storageRef.getDownloadURL();
+      _sendMessage(imageUrl: downloadURL);
+    } catch (e) {
+      print("Error uploading image: $e");
+    }
+  }
+
+  Future<void> _sendMessage({String? text, String? imageUrl}) async {
+    final messageData = {
+      'from': widget.user.email,
+      'date': DateTime.now().toIso8601String(),
+    };
+
+    if (text?.isNotEmpty ?? false) {
+      messageData['text'] = text;
+    }
+    if (imageUrl != null) {
+      messageData['imageUrl'] = imageUrl;
+    }
+
+    await _messageCollectionRef.add(messageData);
+    messageController.clear();
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent + 100,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 300),
+    );
   }
 }
