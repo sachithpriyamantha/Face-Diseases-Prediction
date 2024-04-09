@@ -364,45 +364,31 @@ class _ChatState extends State<Chat> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
         
-Expanded(
-  child: StreamBuilder<QuerySnapshot>(
-    stream: _messageCollectionRef.orderBy('date').snapshots(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _messageCollectionRef.orderBy('date', descending: true).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
-      // Ensuring docs is never null
-      List<DocumentSnapshot> docs = snapshot.data?.docs ?? [];
+                  return ListView.builder(
+                    reverse: true, // Newest messages at the top
+                    controller: scrollController,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var doc = snapshot.data!.docs[index];
+                      var data = doc.data() as Map<String, dynamic>;
 
-      // Initializing messages as an empty list to ensure it's not null
-      List<Widget> messages = [];
-
-      // Safely iterate over docs and build your widgets
-      if (docs.isNotEmpty) {
-        messages = docs.map((doc) {
-          Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
-          // Ensure data is not null before proceeding
-          if (data != null) {
-            return Message(
-              from: data['from'] ?? 'Unknown',
-              text: data['text'] ?? '',
-              imageUrl: data['imageUrl'], // Assuming Message widget can handle nullable imageUrl
-              me: widget.user.email == data['from'],
-              status: data['status'] ?? 'sent', // Handling status
-            );
-          } else {
-            // Returning a placeholder or empty widget if data is null
-            return SizedBox.shrink();
-          }
-        }).toList();
-      }
-
-      return ListView(
-        controller: scrollController,
-        children: messages,
-      );
-    },
-  ),
-),
+                      return Message(
+                        from: data['from'] ?? 'Unknown',
+                        text: data['text'],
+                        imageUrl: data['imageUrl'],
+                        me: widget.user.email == data['from'],
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
 
 
 
