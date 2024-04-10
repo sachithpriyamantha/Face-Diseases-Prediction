@@ -188,11 +188,9 @@ class _TfliteModelState extends State<TfliteModel> {
 
 */
 
-
-
-
 import 'dart:io';
 
+import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
@@ -275,14 +273,16 @@ class _TfliteModelState extends State<TfliteModel> {
       backgroundColor: Color.fromARGB(255, 32, 32, 33),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
-          onPressed: () => Navigator.of(context).pop(),
+          icon:
+              Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Dashboard()),
+          ),
         ),
         title: Text(
           'Scan Diseases',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(255, 22, 0, 147),
       ),
@@ -290,10 +290,24 @@ class _TfliteModelState extends State<TfliteModel> {
         children: <Widget>[
           if (imageSelect)
             Container(
-              margin: const EdgeInsets.only(top: 100),
-              child: Image.file(_image!),
-              height: 400,
-              width: MediaQuery.of(context).size.width - 200,
+              margin: const EdgeInsets.only(top: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Image.file(_image!, fit: BoxFit.cover),
+                ),
+              ),
+              height: 200,
+              width: MediaQuery.of(context).size.width - 20,
             )
           else
             Container(
@@ -317,7 +331,8 @@ class _TfliteModelState extends State<TfliteModel> {
                   ? _results!.map((result) {
                       String label = result['label'];
                       double confidence = result['confidence'] * 100;
-                      String description = diseaseDescriptions[label] ?? "No description available";
+                      String description =
+                          diseaseDescriptions[''] ?? "No description available";
                       return Card(
                         child: Container(
                           margin: EdgeInsets.all(10),
