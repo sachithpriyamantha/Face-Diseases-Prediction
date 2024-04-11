@@ -228,7 +228,7 @@ class Dashboard extends StatelessWidget {
                             } else if (titles[index] == "About") {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => AboutPage()),
+                                    builder: (context) => MyApp()),
                               );
                             } else if (titles[index] == "Chat") {
                               final user = FirebaseAuth

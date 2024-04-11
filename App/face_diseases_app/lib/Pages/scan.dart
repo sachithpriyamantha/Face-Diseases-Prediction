@@ -332,7 +332,7 @@ class _TfliteModelState extends State<TfliteModel> {
                       String label = result['label'];
                       double confidence = result['confidence'] * 100;
                       String description =
-                          diseaseDescriptions[''] ?? "No description available";
+                          diseaseDescriptions['label'] ?? "No description available";
                       return Card(
                         child: Container(
                           margin: EdgeInsets.all(10),
