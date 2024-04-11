@@ -1,8 +1,10 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
 import 'package:face_diseases_app/Pages/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +16,10 @@ class _HomePageState extends State<HomePage> {
 
   // Page controller to control page transitions
   final PageController _pageController = PageController();
+  
+  var user;
+  
+  
 
   @override
   void dispose() {
@@ -32,19 +38,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       //backgroundColor: Colors.transparent,
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         backgroundColor:Color.fromARGB(0, 233, 248, 255),
-      color: Color.fromARGB(255, 94, 41, 147),
+      color: Color.fromARGB(255, 51, 187, 51),
       animationDuration: Duration(milliseconds: 300),
       height: 60,
       
       items: <Widget>[
       Icon(Icons.home, size: 30),
       Icon(Icons.dashboard, size: 30),
+      Icon(Icons.message, size: 30),
       Icon(Icons.person, size: 30),
 
         ],
@@ -58,11 +66,14 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           HomeContent(),
           Dashboard(),
+          Chat(user: user!),
           HomeScreen()
         ],
       ),
     );
   }
+  
+
 }
 class HomeContent extends StatelessWidget {
   @override
@@ -112,7 +123,7 @@ class HomeContent extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
                   child: Text(
-                    'Hi Sachith Priyamantha,\nWelcome to Face Guardian!',
+                    'Hi ${FirebaseAuth.instance.currentUser!.displayName},\nWelcome to Face Guardian!',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -235,7 +246,16 @@ Widget _buildHorizontalList(BuildContext context, List<String> images) {
           children: <Widget>[
             Icon(Icons.menu, color: Colors.white),
             CircleAvatar(
-              backgroundImage: AssetImage('image/about.png'), // Update with your asset path
+            child:
+                                  FirebaseAuth.instance.currentUser!.photoURL ==
+                                          null
+                                      ? Image.asset('image/profile.png')
+                                      : FadeInImage.assetNetwork(
+                                          placeholder: 'image/loading.gif',
+                                          image: FirebaseAuth
+                                              .instance.currentUser!.photoURL!,
+                                          fit: BoxFit.cover,
+                                        ),
             ),
           ],
         ),
