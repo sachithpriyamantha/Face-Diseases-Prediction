@@ -55,6 +55,8 @@ dependencies:
   gap: ^3.0.1
   font_awesome_flutter: ^10.7.0
   carousel_slider: ^4.2.1
+  flutter_icons_null_safety: ^1.1.0
+  tflite_flutter: ^0.10.4
   
 
 
@@ -100,6 +102,7 @@ flutter:
   - assets/model.tflite
   - assets/labels.txt
   - assets/login_animation.riv
+  - image/news/
 
 
   #   - images/a_dot_ham.jpeg
