@@ -58,6 +58,7 @@ class _MyAppState extends State<NearByClinicPage> {
   }
 }*/
 
+import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -85,9 +86,22 @@ class MapSampleState extends State<MapSample> {
     mapController = controller;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+            backgroundColor: const Color.fromARGB(255, 32, 32, 33),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) =>Dashboard()),
+          ),
+        ),
+        title: const Text('Dermatology Hospital', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color.fromARGB(255, 22, 0, 147),
+      ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(

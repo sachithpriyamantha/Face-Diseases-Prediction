@@ -1,3 +1,4 @@
+import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:face_diseases_app/model/user.dart';
 import 'package:flutter/material.dart';
 
@@ -165,6 +166,13 @@ class _HomePageState extends State<HomePage> {
   {
     return Scaffold(
       appBar: AppBar(
+                leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Dashboard()),
+          ),
+        ),
         elevation: 0,
         backgroundColor: Color.fromARGB(255, 22, 0, 147),
         title: Container(
@@ -183,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(50),
                     borderSide: BorderSide.none),
                 hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade500),
-                hintText: "Search Docter Name or District"),
+                hintText: "Search Doctor Name or District"),
           ),
         ),
       ),
@@ -281,33 +289,41 @@ class _HomePageState extends State<HomePage> {
 
           GestureDetector(
             onTap: () {
+
+
 showModalBottomSheet(
   context: context,
   builder: (BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.0), // Increased padding for better spacing
-      height: 250, // Adjusted height for more content
+      padding: EdgeInsets.all(20.0),
+      height: 250,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 157, 103, 228), // Set the background color here
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20), // Curved top left corner
+          topRight: Radius.circular(20) // Curved top right corner
+        )
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             'Doctor Name: ${user.name}',
             style: TextStyle(
-              fontSize: 20, // Larger font for heading
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.blue, // Adding color to enhance visibility
+              color: Color.fromARGB(255, 74, 9, 237),
             ),
           ),
-          SizedBox(height: 10), // Spacing between elements
+          SizedBox(height: 10),
           Divider(),
           Text(
             'Hospital: ${user.username}',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black54, // Subdued color for less important info
+              color: Colors.black54,
             ),
           ),
-        
           SizedBox(height: 10),
           Text(
             'Information: ${user.info}',
