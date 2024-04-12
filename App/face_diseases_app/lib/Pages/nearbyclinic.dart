@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../Locate/locations.dart' as locations;
@@ -53,6 +53,120 @@ class _MyAppState extends State<NearByClinicPage> {
           ),
           markers: _markers.values.toSet(),
         ),
+      ),
+    );
+  }
+}*/
+
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+
+
+class NearByClinicPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MapSample(),
+    );
+  }
+}
+
+class MapSample extends StatefulWidget {
+  @override
+  State<MapSample> createState() => MapSampleState();
+}
+
+class MapSampleState extends State<MapSample> {
+  GoogleMapController? mapController;
+  final LatLng _center = const LatLng(7.8731, 80.7718); // Coordinates of Sri Lanka
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: GoogleMap(
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: _center,
+          zoom: 7.5,
+        ),
+        markers: {
+Marker(
+  markerId: MarkerId('colombo_hospital'),
+  position: LatLng(6.9167, 79.8673),
+  infoWindow: InfoWindow(title: 'National Hospital of Sri Lanka, Colombo'),
+),
+
+Marker(
+  markerId: MarkerId('kandy_hospital'),
+  position: LatLng(7.2964, 80.6350),
+  infoWindow: InfoWindow(title: 'Kandy Teaching Hospital'),
+),
+
+Marker(
+  markerId: MarkerId('gampaha_hospital'),
+  position: LatLng(7.0873, 79.9990),
+  infoWindow: InfoWindow(title: 'Gampaha General Hospital'),
+),
+Marker(
+  markerId: MarkerId('nawaloka_hospital'),
+  position: LatLng(6.9271, 79.8575),
+  infoWindow: InfoWindow(title: 'Nawaloka Hospital, Colombo'),
+),
+Marker(
+  markerId: MarkerId('asiri_hospital'),
+  position: LatLng(6.8774, 79.8611),
+  infoWindow: InfoWindow(title: 'Asiri Hospital, Colombo'),
+),
+Marker(
+  markerId: MarkerId('balangoda_base_hospital'),
+  position: LatLng(6.6472, 80.7046),
+  infoWindow: InfoWindow(title: 'Base Hospital, Balangoda'),
+),
+Marker(
+  markerId: MarkerId('batticaloa_teaching_hospital'),
+  position: LatLng(7.7102, 81.6924),
+  infoWindow: InfoWindow(title: 'Teaching Hospital, Batticaloa'),
+),
+Marker(
+  markerId: MarkerId('central_leprosy_clinic'),
+  position: LatLng(6.9165, 79.8675),
+  infoWindow: InfoWindow(title: 'Central Leprosy Clinic, NHSL, Colombo'),
+),
+Marker(
+  markerId: MarkerId('nhsl_colombo'),
+  position: LatLng(6.9167, 79.8673),
+  infoWindow: InfoWindow(title: 'National Hospital of Sri Lanka, Colombo'),
+),
+Marker(
+  markerId: MarkerId('homagama_base_hospital'),
+  position: LatLng(6.8441, 80.0032),
+  infoWindow: InfoWindow(title: 'Base Hospital, Homagama'),
+),
+Marker(
+  markerId: MarkerId('karapitiya_teaching_hospital'),
+  position: LatLng(6.0535, 80.2170),
+  infoWindow: InfoWindow(title: 'Teaching Hospital, Karapitiya, Galle'),
+),
+Marker(
+  markerId: MarkerId('jaffna_teaching_hospital'),
+  position: LatLng(9.6685, 80.0074),
+  infoWindow: InfoWindow(title: 'Teaching Hospital, Jaffna'),
+),
+Marker(
+  markerId: MarkerId('sirimavo_children_hospital'),
+  position: LatLng(7.2672, 80.5938),
+  infoWindow: InfoWindow(title: 'Sirimavo Bandaranaike Specialized Children\'s Hospital, Peradeniya'),
+),
+
+
+
+
+        },
       ),
     );
   }
