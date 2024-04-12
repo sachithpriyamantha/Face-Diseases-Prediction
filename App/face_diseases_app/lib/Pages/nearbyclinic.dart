@@ -162,8 +162,41 @@ Marker(
   position: LatLng(7.2672, 80.5938),
   infoWindow: InfoWindow(title: 'Sirimavo Bandaranaike Specialized Children\'s Hospital, Peradeniya'),
 ),
-
-
+Marker(
+  markerId: MarkerId('kegalle_district_general_hospital'),
+  position: LatLng(7.2513, 80.3464),
+  infoWindow: InfoWindow(title: 'District General Hospital, Kegalle'),
+),
+Marker(
+  markerId: MarkerId('mawanella_base_hospital'),
+  position: LatLng(7.2481, 80.4466),
+  infoWindow: InfoWindow(title: 'Base Hospital, Mawanella'),
+),
+Marker(
+  markerId: MarkerId('mulleriyawa_base_hospital'),
+  position: LatLng(6.9304, 79.9193),
+  infoWindow: InfoWindow(title: 'Base Hospital, Mulleriyawa'),
+),
+Marker(
+  markerId: MarkerId('nawalapitiya_district_general_hospital'),
+  position: LatLng(7.0524, 80.5358),
+  infoWindow: InfoWindow(title: 'District General Hospital, Nawalapitiya'),
+),
+Marker(
+  markerId: MarkerId('polonnaruwa_district_general_hospital'),
+  position: LatLng(7.9403, 81.0188),
+  infoWindow: InfoWindow(title: 'District General Hospital, Polonnaruwa'),
+),
+Marker(
+  markerId: MarkerId('x_labs_negombo'),
+  position: LatLng(7.2083, 79.8375),
+  infoWindow: InfoWindow(title: 'X-LABS Medical and Channel Services, Negombo'),
+),
+Marker(
+  markerId: MarkerId('anuradhapura_teaching_hospital'),
+  position: LatLng(8.3452, 80.3881),
+  infoWindow: InfoWindow(title: 'Teaching Hospital, Anuradhapura'),
+),
 
 
         },

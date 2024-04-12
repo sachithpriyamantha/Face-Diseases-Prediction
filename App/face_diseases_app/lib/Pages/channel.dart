@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         'Hambantota Hospital',
         
         'https://i1.rgstatic.net/ii/profile.image/751258864480260-1556125479393_Q512/Indira-Kahawita.jpg',
-        'hi my name is doctor i works general hsoptilat',
+        'hi t',
         false
         ),
     User(
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR UWAYSE AHAMED',
         'Colombo Hospital',
- 
+
         'https://www.happysrilankans.com/wp-content/uploads/2020/11/Dr.-Uvais-Ahamed.jpg',
         'hi my name is doctor i works general hsoptilat',
         false
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
         ),
     User('DR D.M AMARATHUNGA',
         'Matara Hospital',
-     
+    
         'https://docplayer.net/docs-images/90/101512065/images/5-4.jpg',
         'hi my name is doctor i works general hsoptilat',
         false
@@ -91,28 +91,28 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR D. BANDARA',
         'Mathale Hospital',
-     
+    
         'https://umanitoba.ca/agricultural-food-sciences/sites/agricultural-food-sciences/files/styles/3x2_900w/public/2021-02/fhns-nandika-bandara.jpg',
         'hi my name is doctor i works general hsoptilat',false
         ),
     User(
         'DR MAHINDA DE SILVA',
         'Gampaha Hospital',
-     
+    
         'https://images.unsplash.com/photo-1541710430735-5fca14c95b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         'hi my name is doctor i works general hsoptilat',false
         ),
     User(
         'DR UPENDRA DE SILVA',
         'Gampaha  Hospital',
-         
+        
         'https://images.unsplash.com/photo-1542534759-05f6c34a9e63?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         'hi my name is doctor i works general hsoptilat',false
         ),
     User(
         'DR MANEL DISSANAYAKE',
         'Nugegoda  Hospital',
- 
+
         'https://images.unsplash.com/photo-1516239482977-b550ba7253f2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         
         'hi my name is doctor i works general hsoptilat',false
@@ -127,14 +127,14 @@ class _HomePageState extends State<HomePage> {
     User(
         'DR S. EKANAYAKA',
         'Galle Hospital',
-     
+    
         'https://images.unsplash.com/photo-1569443693539-175ea9f007e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         'hi my name is doctor i works general hsoptilat',false
         ),
     User(
         'DR(MRS) S FELECIA',
         'Karapitiya Hospital',
-   
+  
         'https://images.unsplash.com/photo-1541710430735-5fca14c95b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         'hi my name is doctor i works general hsoptilat',false
         ),
@@ -247,7 +247,6 @@ class _HomePageState extends State<HomePage> {
             ])
           ]),
 
-          
           /*GestureDetector(
             onTap: () {
               setState(() {
@@ -279,36 +278,49 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 ),
           )*/
+
           GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    padding: EdgeInsets.all(10.0),
-                    height: 200, // Adjust the height as needed
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          //'Doctors Details',
-                          ' ${user.name}',
-                          style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Divider(),
-                        Text('Doctor Name: ${user.name}'),
-                        Text('Hospital: ${user.username}'),
-                        // Text('Contact Number: ${user.contact}'),
-                        //Text('Followers: ${user.followersCount}'),
-                        Text('Infomation: ${user.info}'),
-                        ],
-                      ),
-                    );
-                  },
-                );
+showModalBottomSheet(
+  context: context,
+  builder: (BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.0), // Increased padding for better spacing
+      height: 250, // Adjusted height for more content
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Doctor Name: ${user.name}',
+            style: TextStyle(
+              fontSize: 20, // Larger font for heading
+              fontWeight: FontWeight.bold,
+              color: Colors.blue, // Adding color to enhance visibility
+            ),
+          ),
+          SizedBox(height: 10), // Spacing between elements
+          Divider(),
+          Text(
+            'Hospital: ${user.username}',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black54, // Subdued color for less important info
+            ),
+          ),
+        
+          SizedBox(height: 10),
+          Text(
+            'Information: ${user.info}',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  },
+);
+
               },
               child: AnimatedContainer(
                 height: 35,
