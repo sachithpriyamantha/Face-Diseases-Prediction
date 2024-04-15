@@ -80,7 +80,6 @@ class _AddVideoFormState extends State<AddVideoForm> {
 */
 
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -119,6 +118,11 @@ class YoutubeVideo {
 // Define the DatabaseService class
 class DatabaseService {
   final CollectionReference videoCollection = FirebaseFirestore.instance.collection('videos');
+
+  Stream<List<YoutubeVideo>> getVideos() {
+    return videoCollection.snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => YoutubeVideo.fromMap(doc.data() as Map<String, dynamic>, doc.id)).toList());
+  }
 
   Future<void> addOrUpdateVideo(YoutubeVideo video) async {
     if (video.id.isEmpty) {
@@ -160,42 +164,74 @@ class _AddVideoFormState extends State<AddVideoForm> {
       appBar: AppBar(
         title: Text(widget.video == null ? "Add New Video" : "Edit Video"),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
-              validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
+      body: Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                  validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
+                ),
+                TextFormField(
+                  controller: _videoIdController,
+                  decoration: const InputDecoration(labelText: 'Video ID'),
+                  validator: (value) => value!.isEmpty ? 'Please enter a video ID' : null,
+                ),
+                TextFormField(
+                  controller: _thumbnailUrlController,
+                  decoration: const InputDecoration(labelText: 'Thumbnail URL'),
+                  validator: (value) => value!.isEmpty ? 'Please enter a thumbnail URL' : null,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      YoutubeVideo video = YoutubeVideo(
+                        id: widget.video?.id ?? '',
+                        title: _titleController.text,
+                        videoId: _videoIdController.text,
+                        thumbnailUrl: _thumbnailUrlController.text,
+                      );
+                      await _databaseService.addOrUpdateVideo(video);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Save Video'),
+                ),
+              ],
             ),
-            TextFormField(
-              controller: _videoIdController,
-              decoration: const InputDecoration(labelText: 'Video ID'),
-              validator: (value) => value!.isEmpty ? 'Please enter a video ID' : null,
-            ),
-            TextFormField(
-              controller: _thumbnailUrlController,
-              decoration: const InputDecoration(labelText: 'Thumbnail URL'),
-              validator: (value) => value!.isEmpty ? 'Please enter a thumbnail URL' : null,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  YoutubeVideo video = YoutubeVideo(
-                    id: widget.video?.id ?? '',
-                    title: _titleController.text,
-                    videoId: _videoIdController.text,
-                    thumbnailUrl: _thumbnailUrlController.text,
-                  );
-                  await _databaseService.addOrUpdateVideo(video);
-                  Navigator.pop(context);
+          ),
+          Expanded(
+            child: StreamBuilder<List<YoutubeVideo>>(
+              stream: _databaseService.getVideos(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
                 }
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Error fetching videos'));
+                }
+                if (snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No videos found'));
+                }
+                return ListView(
+                  children: snapshot.data!.map((video) {
+                    return ListTile(
+                      title: Text(video.title),
+                      subtitle: Text(video.videoId),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => _databaseService.addOrUpdateVideo(video),
+                      ),
+                    );
+                  }).toList(),
+                );
               },
-              child: const Text('Save Video'),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
