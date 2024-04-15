@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AdminPanel extends StatelessWidget {
-  const AdminPanel({super.key});
+  final String title;
+   const AdminPanel({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

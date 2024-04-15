@@ -1,6 +1,8 @@
-// ignore_for_file: file_names
 
+
+import 'package:admin/Location/admin_panel.dart';
 import 'package:flutter/material.dart';
+// Ensure this is properly imported
 
 void main() {
   runApp(const MyApp());
@@ -32,15 +34,24 @@ class AdminDashboard extends StatelessWidget {
         centerTitle: true,
       ),
       body: GridView.count(
-        crossAxisCount: 3, // Adjust number for screen size
+        crossAxisCount: 3,
         padding: const EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0, // Adjust ratio for content
-        children: const <Widget>[
-          DashboardCard(title: 'LOCATIONS', icon: Icons.build, color: Colors.lightBlue),
-          DashboardCard(title: 'DOCTORS', icon: Icons.local_hospital, color: Colors.orange),
-          DashboardCard(title: 'ARTICLES', icon: Icons.article, color: Colors.pink),
-          DashboardCard(title: 'STAFF', icon: Icons.group, color: Colors.green),
-          DashboardCard(title: 'CHATHUB', icon: Icons.chat, color: Colors.deepPurple),
+        childAspectRatio: 8.0 / 9.0,
+        children: <Widget>[
+          DashboardCard(
+            title: 'LOCATIONS',
+            icon: Icons.build,
+            color: Colors.lightBlue,
+            onTap: () {
+              Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AdminPanel(title: 'Locations')),
+    );},
+          ),
+          const DashboardCard(title: 'DOCTORS', icon: Icons.local_hospital, color: Colors.orange),
+          const DashboardCard(title: 'ARTICLES', icon: Icons.article, color: Colors.pink),
+          const DashboardCard(title: 'STAFF', icon: Icons.group, color: Colors.green),
+          const DashboardCard(title: 'CHATHUB', icon: Icons.chat, color: Colors.deepPurple),
         ],
       ),
     );
@@ -51,12 +62,14 @@ class DashboardCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color color;
+  final VoidCallback? onTap;
 
   const DashboardCard({
     super.key,
     required this.title,
     required this.icon,
     required this.color,
+    this.onTap,
   });
 
   @override
@@ -64,8 +77,7 @@ class DashboardCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () {
-          // Handle the tap event
+        onTap: onTap ?? () {
           print('Card tapped.');
         },
         child: Column(
