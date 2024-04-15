@@ -1,6 +1,7 @@
 
 
 import 'package:admin/Location/admin_panel.dart';
+import 'package:admin/YoutubeVideo/addVideo.dart';
 import 'package:flutter/material.dart';
 // Ensure this is properly imported
 
@@ -40,7 +41,7 @@ class AdminDashboard extends StatelessWidget {
         children: <Widget>[
           DashboardCard(
             title: 'LOCATIONS',
-            icon: Icons.build,
+            icon: Icons.location_city,
             color: Colors.lightBlue,
             onTap: () {
               Navigator.push(
@@ -48,7 +49,19 @@ class AdminDashboard extends StatelessWidget {
       MaterialPageRoute(builder: (context) => AdminPanel(title: 'Locations')),
     );},
           ),
-          const DashboardCard(title: 'DOCTORS', icon: Icons.local_hospital, color: Colors.orange),
+          DashboardCard(
+  title: 'YouTube Videos',
+  icon: Icons.video_call,
+  color: Colors.orange,
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddVideoForm()),
+    );
+  },
+),
+
+          
           const DashboardCard(title: 'ARTICLES', icon: Icons.article, color: Colors.pink),
           const DashboardCard(title: 'STAFF', icon: Icons.group, color: Colors.green),
           const DashboardCard(title: 'CHATHUB', icon: Icons.chat, color: Colors.deepPurple),
