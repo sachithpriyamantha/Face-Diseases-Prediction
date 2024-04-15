@@ -214,6 +214,7 @@ class Dashboard extends StatelessWidget {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => NearByClinicPage()));
                             } else if (titles[index] == "Learn Videos") {
+                              var youtubeVideos;
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) =>
