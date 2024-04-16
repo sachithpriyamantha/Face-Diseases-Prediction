@@ -1,5 +1,6 @@
 
 
+import 'package:admin/Doctors/chanel.dart';
 import 'package:admin/Location/admin_panel.dart';
 import 'package:admin/YoutubeVideo/addVideo.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,19 @@ class AdminDashboard extends StatelessWidget {
 ),
 
           
-          const DashboardCard(title: 'ARTICLES', icon: Icons.article, color: Colors.pink),
+DashboardCard(
+            title: 'Doctors',
+            icon: Icons.medical_services,
+            color: Colors.pink,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DoctorManagementPage()),
+              );
+            },
+          ),
+          
+          
           const DashboardCard(title: 'STAFF', icon: Icons.group, color: Colors.green),
           const DashboardCard(title: 'CHATHUB', icon: Icons.chat, color: Colors.deepPurple),
         ],
