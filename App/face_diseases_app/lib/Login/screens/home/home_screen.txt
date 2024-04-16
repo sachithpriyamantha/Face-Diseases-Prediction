@@ -23,45 +23,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ImagePicker _picker = ImagePicker();
-  XFile? _imageFile;
+  TextEditingController _nameController = TextEditingController();
+  ImageProvider? _profileImage;
 
-  Future<void> _pickImage() async {
-    try {
-      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        setState(() {
-          _imageFile = pickedFile;
-        });
-        await _uploadImage();
-      }
-    } catch (e) {
-      // Handle errors or cancellation
-    }
+  @override
+  void initState() {
+    super.initState();
+    _nameController.text = FirebaseAuth.instance.currentUser!.displayName ?? '';
+    _profileImage = (FirebaseAuth.instance.currentUser!.photoURL != null
+        ? NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!)
+        : AssetImage('image/profile.png')) as ImageProvider<Object>?; // Ensure you have this image in your assets
   }
 
-  Future<void> _uploadImage() async {
-    if (_imageFile == null) return;
-    final file = File(_imageFile!.path);
-    try {
-      final ref = FirebaseStorage.instance
-          .ref('profile_images/${FirebaseAuth.instance.currentUser!.uid}/${_imageFile!.name}');
-      await ref.putFile(file);
-      final url = await ref.getDownloadURL();
-      await _updateUserProfile(url);
-    } catch (e) {
-      // Handle upload errors
-    }
-  }
-
-  Future<void> _updateUserProfile(String imageUrl) async {
-    try {
-      await FirebaseAuth.instance.currentUser!.updatePhotoURL(imageUrl);
-      setState(() {});
-      // Optionally, show a success message or update UI accordingly
-    } catch (e) {
-      // Handle update errors
-    }
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -99,25 +76,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   SafeArea _homePage(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: _pickImage,
-                child: CircleAvatar(
-                  radius: 100,
-                  backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL!) : AssetImage('image/profile.png') as ImageProvider,
-                  child: Icon(Icons.camera_alt, size: 25, color: Colors.white54),
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: GestureDetector(
+                  onTap: () => _pickImage(),
+                  child: CircleAvatar(
+                    backgroundImage: _profileImage,
+                  ),
                 ),
               ),
-              Text(
-                user.displayName ?? 'Anonymous',
-                style: TextStyles.font15DarkBlue500Weight.copyWith(fontSize: 30.sp),
+              GestureDetector(
+                onTap: () => _editName(context),
+                child: Text(
+                  _nameController.text,
+                  style: TextStyles.font15DarkBlue500Weight.copyWith(fontSize: 30.sp),
+                ),
               ),
               AppTextButton(
                 buttonText: 'Sign Out',
@@ -147,4 +127,79 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  Future<void> _editName(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Name'),
+          content: TextField(
+            controller: _nameController,
+            decoration: InputDecoration(hintText: "Enter new name"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Save'),
+              onPressed: () {
+                // Update name in Firebase or locally
+                setState(() {});
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = FileImage(File(pickedFile.path));
+      });
+      // Optionally, upload the new image to Firebase or handle accordingly
+    }
+  }
+  Future<void> _updateUserName(String name) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await user.updateProfile(displayName: name);
+      await user.reload();
+      setState(() {
+        _nameController.text = user.displayName ?? '';
+      });
+    }
+  }
+    Future<void> _uploadProfileImage(File image) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_images/${user.uid}/profile_pic.png');
+      await ref.putFile(image);
+      final url = await ref.getDownloadURL();
+      await user.updateProfile(photoURL: url);
+      await user.reload();
+      setState(() {
+        _profileImage = NetworkImage(url);
+      });
+    }
+  }
 }
+
+
+
+
+
+
+
+

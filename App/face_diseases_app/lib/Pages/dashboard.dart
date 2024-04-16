@@ -1,5 +1,6 @@
 import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
+import 'package:face_diseases_app/Pages/Report.dart';
 import 'package:face_diseases_app/Pages/channel.dart';
 import 'package:face_diseases_app/Pages/video.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,7 @@ class Dashboard extends StatelessWidget {
 // list of images
   List imgData = [
     "image/Scan.png",
+    "image/report.png",
     "image/diseases.png",
     "image/clinic.png",
     "image/doctor.png",
@@ -31,6 +33,7 @@ class Dashboard extends StatelessWidget {
 // list of dashbord card title
   List titles = [
     "Scan",
+    "Daily Report",
     "Face Diseases",
     "Near By Clinic",
     "Doctors",
@@ -226,11 +229,17 @@ class Dashboard extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => HomeScreen()),
                               );
-                            } else if (titles[index] == "About") {
+                            } else if (titles[index] == "Daily Report") {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => DailyReportPage()),
+                              );}
+                              else if (titles[index] == "About") {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => AboutPage()),
                               );
+
                             } else if (titles[index] == "Chat") {
                               final user = FirebaseAuth
                                   .instance.currentUser; // Get the current user

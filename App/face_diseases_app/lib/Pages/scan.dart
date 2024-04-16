@@ -731,6 +731,7 @@ class _TfliteModelState extends State<TfliteModel> {
             MaterialPageRoute(builder: (context) => Dashboard()),
           ),
         ),
+      
         title: const Text('Scan Diseases', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 22, 0, 147),
       ),

@@ -387,8 +387,6 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
   }
 
 
-
-
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -442,5 +440,7 @@ class FirestoreService {
       return videos;
     });
   }
+
+  getUsers() {}
 }
 
