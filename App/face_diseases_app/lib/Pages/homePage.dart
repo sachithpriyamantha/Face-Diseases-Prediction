@@ -171,41 +171,58 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularNews(BuildContext context) {
-    List<Map<String, dynamic>> newsItems = [
-      {
-        'title': 'Eczema and the cold',
-        'description':
-            'Eczema is a skin condition that makes your skin dry, itchy, and inflamed. It can show up as rashes, scaly patches, blisters, or infected skin. It affects about 30% of Americans, mostly children and adolescents. The most common type of',
-        'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/eczemaComp980x587.jpg'
-      },
-      {
-        'title': 'Identifying common conditions',
-        'description':
-            'Sometimes, due to our environments and genes, our skin gets, well, unhappy. But how can you tell the difference between a minor rash and a more serious condition? Read our quick rundown of five common skin conditions and what they look like. Also, be sure to talk to a dermatologist, a doctor who specializes in skin conditions, or other health care provider for a full diagnosis and care.',
-        'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/skin-101-480.jpg'
-      },
-      {
-        'title': 'Healthcare Advances',
-        'description':
-            'Recent advancements in healthcare could change the way diseases are treated.',
-        'imageUrl': 'https://via.placeholder.com/150'
-      },
-    ];
-    return Column(
-      children: newsItems.map((item) {
-        return ListTile(
-          leading: Image.network(item['imageUrl'],
-              width: 80, height: 80, fit: BoxFit.cover),
-          title: Text(item['title'],
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Text(item['description']),
-        );
-      }).toList(),
-    );
-  }
+Widget _buildPopularNews(BuildContext context) {
+  List<Map<String, dynamic>> newsItems = [
+    {
+      'title': 'Eczema and the cold',
+      'description':
+          'Eczema is a skin condition that makes your skin dry, itchy, and inflamed. It can show up as rashes, scaly patches, blisters, or infected skin. It affects about 30% of Americans, mostly children and adolescents. The most common type of',
+      'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/eczemaComp980x587.jpg'
+    },
+    {
+      'title': 'Identifying common conditions',
+      'description':
+          'Sometimes, due to our environments and genes, our skin gets, well, unhappy. But how can you tell the difference between a minor rash and a more serious condition? Read our quick rundown of five common skin conditions and what they look like. Also, be sure to talk to a dermatologist, a doctor who specializes in skin conditions, or other health care provider for a full diagnosis and care.',
+      'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/skin-101-480.jpg'
+    },
+    {
+      'title': 'Healthcare Advances',
+      'description':
+          'Recent advancements in healthcare could change the way diseases are treated.',
+      'imageUrl': 'https://via.placeholder.com/150'
+    },
+  ];
 
- 
+  return Column(
+    children: newsItems.map((item) {
+      return Container(
+        margin: EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 174, 224, 234),
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 5.0,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: ListTile(
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0), // Rounded corners for the image
+            child: Image.network(item['imageUrl'], width: 80, height: 80, fit: BoxFit.cover),
+          ),
+          title: Text(
+            item['title'],
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(item['description']),
+        ),
+      );
+    }).toList(),
+  );
+}
 
   Widget _buildTopBar() {
     return SafeArea(
