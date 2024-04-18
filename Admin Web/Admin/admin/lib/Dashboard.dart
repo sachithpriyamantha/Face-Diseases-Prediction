@@ -66,7 +66,9 @@ class AdminDashboard extends StatelessWidget {
           
 DashboardCard(
             title: 'Doctors',
+            
             icon: Icons.medical_services,
+            
             color: Colors.pink,
             onTap: () {
               Navigator.push(
