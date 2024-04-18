@@ -1,6 +1,7 @@
 
 
 import 'package:admin/Doctors/chanel.dart';
+import 'package:admin/Home/Popular_News.dart';
 import 'package:admin/Location/admin_panel.dart';
 import 'package:admin/YoutubeVideo/addVideo.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class AdminDashboard extends StatelessWidget {
             onTap: () {
               Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AdminPanel(title: 'Locations')),
+      MaterialPageRoute(builder: (context) => const AdminPanel(title: 'Locations')),
     );},
           ),
           DashboardCard(
@@ -57,7 +58,7 @@ class AdminDashboard extends StatelessWidget {
   onTap: () {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddVideoForm()),
+      MaterialPageRoute(builder: (context) => const VideoManagementPage()),
     );
   },
 ),
@@ -76,7 +77,18 @@ DashboardCard(
           ),
           
           
-          const DashboardCard(title: 'STAFF', icon: Icons.group, color: Colors.green),
+DashboardCard(
+  title: 'Popular News', 
+  icon: Icons.newspaper, 
+  color: Colors.green,
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AdminNewsPage()),
+    );
+  },
+),
+
           const DashboardCard(title: 'CHATHUB', icon: Icons.chat, color: Colors.deepPurple),
         ],
       ),

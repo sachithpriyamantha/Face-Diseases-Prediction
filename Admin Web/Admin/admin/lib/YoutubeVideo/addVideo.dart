@@ -1,88 +1,7 @@
 
-// ignore_for_file: file_names
-/*
-import 'package:admin/YoutubeVideo/video.dart';
-import 'package:flutter/material.dart';
-
-
-class AddVideoForm extends StatefulWidget {
-  final YoutubeVideo? video;
-
-  const AddVideoForm({super.key, this.video});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _AddVideoFormState createState() => _AddVideoFormState();
-}
-
-class _AddVideoFormState extends State<AddVideoForm> {
-  final _formKey = GlobalKey<FormState>();
-  late TextEditingController _titleController;
-  late TextEditingController _videoIdController;
-  late TextEditingController _thumbnailUrlController;
-
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController(text: widget.video?.title ?? '');
-    _videoIdController = TextEditingController(text: widget.video?.videoId ?? '');
-    _thumbnailUrlController = TextEditingController(text: widget.video?.thumbnailUrl ?? '');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.video == null ? "Add New Video" : "Edit Video"),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
-              validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
-            ),
-            TextFormField(
-              controller: _videoIdController,
-              decoration: const InputDecoration(labelText: 'Video ID'),
-              validator: (value) => value!.isEmpty ? 'Please enter a video ID' : null,
-            ),
-            TextFormField(
-              controller: _thumbnailUrlController,
-              decoration: const InputDecoration(labelText: 'Thumbnail URL'),
-              validator: (value) => value!.isEmpty ? 'Please enter a thumbnail URL' : null,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  YoutubeVideo video = YoutubeVideo(
-                    id: widget.video?.id ?? '',
-                    title: _titleController.text,
-                    videoId: _videoIdController.text,
-                    thumbnailUrl: _thumbnailUrlController.text,
-                  );
-                  await DatabaseService().addOrUpdateVideo(video);
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text('Save Video'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-*/
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-// Define the YouTubeVideo model
 class YoutubeVideo {
   final String id;
   final String title;
@@ -114,7 +33,6 @@ class YoutubeVideo {
   }
 }
 
-// Define the DatabaseService class
 class DatabaseService {
   final CollectionReference videoCollection = FirebaseFirestore.instance.collection('videos');
 
@@ -130,108 +48,114 @@ class DatabaseService {
       await videoCollection.doc(video.id).update(video.toMap());
     }
   }
+
+  Future<void> deleteVideo(String videoId) async {
+    await videoCollection.doc(videoId).delete();
+  }
 }
 
-// Define the AddVideoForm widget
-class AddVideoForm extends StatefulWidget {
-  final YoutubeVideo? video;
-
-  const AddVideoForm({super.key, this.video});
+class VideoManagementPage extends StatefulWidget {
+  const VideoManagementPage({Key? key}) : super(key: key);
 
   @override
-  _AddVideoFormState createState() => _AddVideoFormState();
+  _VideoManagementPageState createState() => _VideoManagementPageState();
 }
 
-class _AddVideoFormState extends State<AddVideoForm> {
-  final _formKey = GlobalKey<FormState>();
-  late TextEditingController _titleController;
-  late TextEditingController _videoIdController;
-  late TextEditingController _thumbnailUrlController;
+class _VideoManagementPageState extends State<VideoManagementPage> {
   final DatabaseService _databaseService = DatabaseService();
 
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController(text: widget.video?.title ?? '');
-    _videoIdController = TextEditingController(text: widget.video?.videoId ?? '');
-    _thumbnailUrlController = TextEditingController(text: widget.video?.thumbnailUrl ?? '');
-  }
+  void _addOrEditVideo(BuildContext context, {YoutubeVideo? video}) {
+    TextEditingController titleController = TextEditingController(text: video?.title ?? '');
+    TextEditingController videoIdController = TextEditingController(text: video?.videoId ?? '');
+    TextEditingController thumbnailUrlController = TextEditingController(text: video?.thumbnailUrl ?? '');
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.video == null ? "Add New Video" : "Edit Video"),
-      ),
-      body: Column(
-        children: [
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
-                  validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
-                ),
-                TextFormField(
-                  controller: _videoIdController,
-                  decoration: const InputDecoration(labelText: 'Video ID'),
-                  validator: (value) => value!.isEmpty ? 'Please enter a video ID' : null,
-                ),
-                TextFormField(
-                  controller: _thumbnailUrlController,
-                  decoration: const InputDecoration(labelText: 'Thumbnail URL'),
-                  validator: (value) => value!.isEmpty ? 'Please enter a thumbnail URL' : null,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      YoutubeVideo video = YoutubeVideo(
-                        id: widget.video?.id ?? '',
-                        title: _titleController.text,
-                        videoId: _videoIdController.text,
-                        thumbnailUrl: _thumbnailUrlController.text,
-                      );
-                      await _databaseService.addOrUpdateVideo(video);
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: const Text('Save Video'),
-                ),
-              ],
-            ),
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(video == null ? 'Add Video' : 'Edit Video'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(controller: titleController, decoration: const InputDecoration(labelText: 'Title')),
+              TextField(controller: videoIdController, decoration: const InputDecoration(labelText: 'Video ID')),
+              TextField(controller: thumbnailUrlController, decoration: const InputDecoration(labelText: 'Thumbnail URL')),
+            ],
           ),
-          Expanded(
-            child: StreamBuilder<List<YoutubeVideo>>(
-              stream: _databaseService.getVideos(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasError) {
-                  return const Center(child: Text('Error fetching videos'));
-                }
-                if (snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No videos found'));
-                }
-                return ListView(
-                  children: snapshot.data!.map((video) {
-                    return ListTile(
-                      title: Text(video.title),
-                      subtitle: Text(video.videoId),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => _databaseService.addOrUpdateVideo(video),
-                      ),
-                    );
-                  }).toList(),
-                );
-              },
-            ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              YoutubeVideo updatedVideo = YoutubeVideo(
+                id: video?.id ?? '',
+                title: titleController.text,
+                videoId: videoIdController.text,
+                thumbnailUrl: thumbnailUrlController.text,
+              );
+              _databaseService.addOrUpdateVideo(updatedVideo);
+              Navigator.pop(context);
+            },
+            child: Text(video == null ? 'Add' : 'Save'),
           ),
         ],
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Manage Videos')),
+      body: StreamBuilder<List<YoutubeVideo>>(
+        stream: _databaseService.getVideos(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error fetching videos'));
+          }
+          if (snapshot.hasData && snapshot.data!.isEmpty) {
+            return const Center(child: Text('No videos found'));
+          }
+          return ListView(
+            children: snapshot.data!.map((video) {
+              return ListTile(
+                title: Text(video.title),
+                subtitle: Text(video.videoId),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () => _addOrEditVideo(context, video: video),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () => _databaseService.deleteVideo(video.id),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _addOrEditVideo(context),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: VideoManagementPage(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
