@@ -1,10 +1,12 @@
 
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
 import 'package:face_diseases_app/Pages/dashboard.dart';
+import 'package:face_diseases_app/Pages/scan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -39,14 +41,16 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         backgroundColor: Colors.transparent,
-        color: Color.fromARGB(255, 55, 55, 240),
+        color: Color.fromARGB(255, 55, 237, 240),
         animationDuration: Duration(milliseconds: 300),
         height: 60,
         items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.dashboard, size: 30),
-          Icon(Icons.message, size: 30),
-          Icon(Icons.person, size: 30),
+          Icon(Icons.home_outlined, size: 30),
+          
+          Icon(Icons.dashboard_customize_outlined, size: 30),
+          Icon(Icons.add_a_photo_outlined, size: 30,),
+          Icon(Icons.message_outlined, size: 30),
+          Icon(Icons.person_2_outlined, size: 30),
         ],
         onTap: _onIconTapped,
       ),
@@ -56,6 +60,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           HomeContent(),
           Dashboard(),
+          ScanPage(),
           Chat(user: user!),
           HomeScreen()
         ],
@@ -171,7 +176,7 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-Widget _buildPopularNews(BuildContext context) {
+/*Widget _buildPopularNews(BuildContext context) {
   List<Map<String, dynamic>> newsItems = [
     {
       'title': 'Eczema and the cold',
@@ -222,7 +227,54 @@ Widget _buildPopularNews(BuildContext context) {
       );
     }).toList(),
   );
+}*/
+
+Widget _buildPopularNews(BuildContext context) {
+  final Stream<QuerySnapshot> _newsStream = FirebaseFirestore.instance.collection('news').snapshots();
+
+  return StreamBuilder<QuerySnapshot>(
+    stream: _newsStream,
+    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      if (snapshot.hasError) {
+        return Text('Something went wrong');
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Text("Loading");
+      }
+      return Column(
+        children: snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> news = document.data()! as Map<String, dynamic>;
+          return Container(
+            margin: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 174, 224, 234),
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 5.0,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(news['imageUrl'], width: 80, height: 80, fit: BoxFit.cover),
+              ),
+              title: Text(
+                news['title'],
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(news['description']),
+            ),
+          );
+        }).toList(),
+      );
+    },
+  );
 }
+
 
   Widget _buildTopBar() {
     return SafeArea(
