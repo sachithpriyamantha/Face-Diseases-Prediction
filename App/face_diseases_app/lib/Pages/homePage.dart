@@ -70,6 +70,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeContent extends StatelessWidget {
+   final List<Doctor> doctors = [
+    Doctor(name: 'Dr. John Shirima', specialty: 'Dermatologist', distance: 'Gampaha Hospital', imagePath: 'image/doctor.png'),
+    Doctor(name: 'Dr. Siripala', specialty: 'Dermatologist', distance: 'Colombo Hospital', imagePath: 'image/doctor.png'),
+    Doctor(name: 'Dr. John Shirima', specialty: 'Dermatologist', distance: 'Gampaha Hospital', imagePath: 'image/doctor.png'),
+    // ... more doctors
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> carouselItems = [
@@ -95,8 +101,9 @@ class HomeContent extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Container(
+           
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 167, 5, 192),
+              color: Color.fromARGB(255, 30, 33, 128),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -109,15 +116,30 @@ class HomeContent extends StatelessWidget {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-                  child: Text(
-                    'Hi ${FirebaseAuth.instance.currentUser!.displayName},\nWelcome to Face Guardian!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                  child: RichText(
+  textAlign: TextAlign.center,
+  text: TextSpan(
+    children: [
+      TextSpan(
+        text: 'Hi ${FirebaseAuth.instance.currentUser!.displayName},\nWelcome to ',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+      TextSpan(
+        text: 'Face Guardian!',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.yellow, // Change this color to the one you want for "Face Guardian"
+        ),
+      ),
+    ],
+  ),
+),
+
                 ),
                 SizedBox(height: 16), // Adjust the space as per design
               ],
@@ -127,25 +149,29 @@ class HomeContent extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.only(top: 20),
               children: <Widget>[
-                _buildSectionHeader('Sachith'),
-                CarouselSlider.builder(
-                  itemCount: carouselItems.length,
-                  itemBuilder: (context, index, realIndex) {
-                    final item = carouselItems[index];
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        color: item['color'],
-                        borderRadius: BorderRadius.circular(15.0),
-                        image: DecorationImage(
-                          image: AssetImage(item['image']),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.3),
-                            BlendMode.darken,
-                          ),
-                        ),
-                      ),
+                _buildSectionHeader('Empower Yourself'),
+                SizedBox(
+          height: 150,
+          // Set the height of the slider here
+          child: CarouselSlider.builder(
+            itemCount: carouselItems.length,
+            itemBuilder: (context, index, realIndex) {
+              final item = carouselItems[index];
+              return Container(
+              
+                // No need to set margins here if you're using SizedBox
+                decoration: BoxDecoration(
+                  color: item['color'],
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: AssetImage(item['image']),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.3),
+                      BlendMode.darken,
+                    ),
+                  ),
+                ),
                       child: Center(
                         child: Text(
                           item['text'],
@@ -165,7 +191,10 @@ class HomeContent extends StatelessWidget {
                     aspectRatio: 2.0,
                   ),
                 ),
-                
+                ),
+                _buildSectionHeader('Doctors'),
+                _buildNearbyDoctorsList(),
+
                 _buildSectionHeader('Popular News'),
                 _buildPopularNews(context), // New widget for popular news
               ],
@@ -175,6 +204,60 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
+Widget _buildNearbyDoctorsList() {
+    return Container(
+      height: 170.0, // Set a height that suits your design
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: doctors.length,
+        itemBuilder: (context, index) {
+          final doctor = doctors[index];
+          return Container(
+            width: 200.0, // Set a width that suits your design
+            padding: EdgeInsets.all(8.0),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage(doctor.imagePath),
+                    radius: 30.0,
+                  ),
+                  SizedBox(height: 6.0),
+                  Text(
+                    doctor.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    doctor.specialty,
+                    style: TextStyle(
+                      fontSize: 12.0,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    doctor.distance,
+                    style: TextStyle(
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
 
 /*Widget _buildPopularNews(BuildContext context) {
   List<Map<String, dynamic>> newsItems = [
@@ -247,7 +330,7 @@ Widget _buildPopularNews(BuildContext context) {
           return Container(
             margin: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 174, 224, 234),
+              color: Color.fromARGB(255, 205, 208, 209),
               borderRadius: BorderRadius.circular(15.0),
               boxShadow: [
                 BoxShadow(
@@ -329,4 +412,17 @@ Widget _buildPopularNews(BuildContext context) {
       ),
     );
   }
+}
+class Doctor {
+  final String name;
+  final String specialty;
+  final String distance;
+  final String imagePath;
+
+  Doctor({
+    required this.name,
+    required this.specialty,
+    required this.distance,
+    required this.imagePath,
+  });
 }
