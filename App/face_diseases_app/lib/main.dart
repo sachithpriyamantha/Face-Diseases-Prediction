@@ -1,55 +1,40 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:admin/AdminLogin/admin_auth.dart';
+import 'package:admin/Dashboard.dart';
+//import 'package:admin/admin_panel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// import the configuration file you generated using Firebase CLI
-import 'firebase_options.dart';
-import 'routing/app_router.dart';
-import 'routing/routes.dart';
 
-late String initialRoute;
 
-void main() async {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FirebaseAuth.instance.authStateChanges().listen(
-    (user) {
-      if (user == null || !user.emailVerified) {
-        initialRoute = Routes.loginScreen;
-      } else {
-        initialRoute = Routes.homePage;
-      }
-    },
-  );
-  await ScreenUtil.ensureScreenSize();
-  runApp(MyApp(router: AppRouter()));
+    options: const FirebaseOptions(
+  apiKey: "AIzaSyCp4GfztZhq-YlkAoMzI58DBxaUCOSnDXE",
+  projectId: "facediseasesapp-635d0",
+  messagingSenderId: "1072306408314",
+  appId: "1:1072306408314:web:10705a8c7e4ca8f7aae4c3",));
+    
+
+runApp( const MyApp());
+
+  
 }
 
 class MyApp extends StatelessWidget {
-  final AppRouter router;
-
-  const MyApp({super.key, required this.router});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return MaterialApp(
-          title: 'Login & Signup App',
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
-          onGenerateRoute: router.generateRoute,
-          debugShowCheckedModeBanner: false,
-          initialRoute: initialRoute,
-        );
+    return MaterialApp(
+      title: 'Flutter Web Admin',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const AdminSignIn(),
+        '/admin': (context) =>  const AdminDashboard(),
       },
     );
   }
 }
+
