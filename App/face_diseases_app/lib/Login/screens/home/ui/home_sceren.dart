@@ -162,6 +162,7 @@ class _ProfilePageState extends State<HomeScreen> with SingleTickerProviderState
   String _userName = "Tap to edit name...";
   AnimationController? _controller;
   Animation<double>? _opacity;
+   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -190,7 +191,17 @@ class _ProfilePageState extends State<HomeScreen> with SingleTickerProviderState
     _controller?.dispose();
     super.dispose();
   }
-
+ Future<String> _fetchUsername() async {
+    if (user == null) {
+      return 'No User';
+    }
+    try {
+      var userData = await _firestore.collection('users').doc(user?.uid).get();
+      return userData.data()?['${FirebaseAuth.instance.currentUser!.displayName}'] ?? 'No Username';
+    } catch (e) {
+      return 'Failed to fetch username';
+    }
+  }
   void _editBio() {
     showDialog<void>(
       context: context,
@@ -274,7 +285,7 @@ class _ProfilePageState extends State<HomeScreen> with SingleTickerProviderState
   @override
   Widget build(BuildContext context) {
     final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
-    final String userEmail = user?.email ?? 'N/A';
+    //final String userEmail = user?.email ?? 'N/A';
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -292,27 +303,50 @@ class _ProfilePageState extends State<HomeScreen> with SingleTickerProviderState
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(user?.photoURL ?? profileImagePlaceholder),
+                backgroundImage:
+                    NetworkImage(user?.photoURL ?? profileImagePlaceholder),
                 backgroundColor: Colors.transparent,
               ),
               SizedBox(height: 20),
-              Text(userEmail, style: TextStyle(fontSize: 16, color: Colors.white)),
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: _editName,
-                child: AnimatedOpacity(
-                  opacity: _opacity?.value ?? 0,
-                  duration: Duration(seconds: 1),
-                  child: Text(_userName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+              /* Text(
+                userEmail,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
                 ),
+              ),*/
+              FutureBuilder<String>(
+                future: _fetchUsername(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading...",
+                        style: TextStyle(color: Colors.white));
+                  } else {
+                    return Text(
+                      snapshot.data!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    );
+                  }
+                },
               ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: _editBio,
-                child: AnimatedOpacity(
-                  opacity: _opacity?.value ?? 0,
-                  duration: Duration(seconds: 1),
-                  child: Text(_userBio, style: TextStyle(fontSize: 16, color: Colors.white)),
+              SizedBox(height: 20),
+              AnimatedOpacity(
+                opacity: _opacity?.value ?? 0,
+                duration: Duration(seconds: 1),
+                child: GestureDetector(
+                  onTap: _editBio,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      _userBio,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -326,7 +360,7 @@ class _ProfilePageState extends State<HomeScreen> with SingleTickerProviderState
     );
   }
 
-  Widget _buildTile(IconData icon, String title, [VoidCallback? onTap]) {
+Widget _buildTile(IconData icon, String title, [VoidCallback? onTap]) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
       title: Text(title, style: TextStyle(color: Colors.white)),

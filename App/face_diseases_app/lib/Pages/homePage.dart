@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
+import 'package:face_diseases_app/Pages/PopularNews.dart';
+import 'package:face_diseases_app/Pages/channel.dart';
 import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:face_diseases_app/Pages/scan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.dashboard_customize_outlined, size: 30),
           Icon(Icons.add_a_photo_outlined, size: 30,),
           Icon(Icons.message_outlined, size: 30),
-          Icon(Icons.person_2_outlined, size: 30),
+          Icon(Icons.manage_accounts_outlined, size: 30),
         ],
         onTap: _onIconTapped,
       ),
@@ -70,10 +72,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeContent extends StatelessWidget {
-   final List<Doctor> doctors = [
-    Doctor(name: 'Dr. John Shirima', specialty: 'Dermatologist', distance: 'Gampaha Hospital', imagePath: 'image/doctor.png'),
-    Doctor(name: 'Dr. Siripala', specialty: 'Dermatologist', distance: 'Colombo Hospital', imagePath: 'image/doctor.png'),
-    Doctor(name: 'Dr. John Shirima', specialty: 'Dermatologist', distance: 'Gampaha Hospital', imagePath: 'image/doctor.png'),
+  final List<Doctor> doctors = [
+    Doctor(name: 'Dr. (MRS) P. SENAKA', specialty: 'Dermatologist', distance: 'Hambantota Hospital', imageUrl: 'https://i1.rgstatic.net/ii/profile.image/751258864480260-1556125479393_Q512/Indira-Kahawita.jpg'),
+    Doctor(name: 'Dr. S. ABEYKEERTHI', specialty: 'Dermatologist', distance: 'Anuradhapura Hospital', imageUrl: 'https://groundviews.org/wp-content/uploads/2012/08/Screen-Shot-2012-08-27-at-11.37.32-PM.jpg'),
+    Doctor(name: 'Dr. UWAYSE AHAMED', specialty: 'Dermatologist', distance: 'Colombo Hospital', imageUrl: 'https://www.happysrilankans.com/wp-content/uploads/2020/11/Dr.-Uvais-Ahamed.jpg'),
     // ... more doctors
   ];
   @override
@@ -149,7 +151,7 @@ class HomeContent extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.only(top: 20),
               children: <Widget>[
-                _buildSectionHeader('Empower Yourself'),
+                _buildSectionHeader(context, 'Empower Yourself'),
                 SizedBox(
           height: 150,
           // Set the height of the slider here
@@ -192,11 +194,10 @@ class HomeContent extends StatelessWidget {
                   ),
                 ),
                 ),
-                _buildSectionHeader('Doctors'),
-                _buildNearbyDoctorsList(),
-
-                _buildSectionHeader('Popular News'),
-                _buildPopularNews(context), // New widget for popular news
+          _buildSectionHeader(context, 'Doctors'), // Doctors section with "View More"
+          _buildNearbyDoctorsList(context),
+          _buildSectionHeader(context, 'Popular News'), // No "View More" for other sections
+          _buildPopularNews(context),// New widget for popular news
               ],
             ),
           ),
@@ -205,7 +206,7 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-Widget _buildNearbyDoctorsList() {
+Widget _buildNearbyDoctorsList(BuildContext context) {
     return Container(
       height: 170.0, // Set a height that suits your design
       child: ListView.builder(
@@ -224,7 +225,7 @@ Widget _buildNearbyDoctorsList() {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(doctor.imagePath),
+                    backgroundImage: NetworkImage(doctor.imageUrl),
                     radius: 30.0,
                   ),
                   SizedBox(height: 6.0),
@@ -249,9 +250,12 @@ Widget _buildNearbyDoctorsList() {
                       fontSize: 12.0,
                     ),
                   ),
+                  
                 ],
               ),
+              
             ),
+            
           );
         },
       ),
@@ -259,18 +263,20 @@ Widget _buildNearbyDoctorsList() {
   }
 
 
-/*Widget _buildPopularNews(BuildContext context) {
+
+
+Widget _buildPopularNews(BuildContext context) {
   List<Map<String, dynamic>> newsItems = [
     {
       'title': 'Eczema and the cold',
       'description':
-          'Eczema is a skin condition that makes your skin dry, itchy, and inflamed. It can show up as rashes, scaly patches, blisters, or infected skin. It affects about 30% of Americans, mostly children and adolescents. The most common type of',
+          'Eczema is a skin condition that makes your skin dry, itchy, and inflamed.',/*  It can show up as rashes, scaly patches, blisters, or infected skin. It affects about 30% of Americans, mostly children and adolescents. The most common type of',*/
       'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/eczemaComp980x587.jpg'
     },
     {
       'title': 'Identifying common conditions',
       'description':
-          'Sometimes, due to our environments and genes, our skin gets, well, unhappy. But how can you tell the difference between a minor rash and a more serious condition? Read our quick rundown of five common skin conditions and what they look like. Also, be sure to talk to a dermatologist, a doctor who specializes in skin conditions, or other health care provider for a full diagnosis and care.',
+          'Sometimes, due to our environments and genes, our skin gets, well, unhappy.', /* But how can you tell the difference between a minor rash and a more serious condition? Read our quick rundown of five common skin conditions and what they look like. Also, be sure to talk to a dermatologist, a doctor who specializes in skin conditions, or other health care provider for a full diagnosis and care.',*/
       'imageUrl': 'https://magazine.medlineplus.gov/images/uploads/main_images/skin-101-480.jpg'
     },
     {
@@ -310,9 +316,9 @@ Widget _buildNearbyDoctorsList() {
       );
     }).toList(),
   );
-}*/
+}
 
-Widget _buildPopularNews(BuildContext context) {
+/*Widget _buildPopularNews(BuildContext context) {
   final Stream<QuerySnapshot> _newsStream = FirebaseFirestore.instance.collection('news').snapshots();
 
   return StreamBuilder<QuerySnapshot>(
@@ -356,7 +362,7 @@ Widget _buildPopularNews(BuildContext context) {
       );
     },
   );
-}
+}*/
 
 
   Widget _buildTopBar() {
@@ -383,46 +389,68 @@ Widget _buildPopularNews(BuildContext context) {
     );
   }
 
-  Widget _buildSectionHeader(String title) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          /*TextButton(
-            onPressed: () {
-// Handle 'More' button press
+
+  Widget _buildSectionHeader(BuildContext context, String title) {
+  return Padding(
+    padding: EdgeInsets.all(16.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(
+          title,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        if (title == "Doctors")  // Only for the Doctors section
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChannelPage()), // Assuming ChannelPage exists
+              );
             },
             child: Text(
-              'More',
-              style: TextStyle(color: Colors.teal),
+              "View More",
+              style: TextStyle(color: const Color.fromARGB(255, 65, 66, 66), fontWeight: FontWeight.bold),
             ),
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              minimumSize: Size(50, 30),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              alignment: Alignment.centerLeft,
+          ),
+                  if (title == "Popular News")  // Only for the Doctors section
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NewsPage()), // Assuming ChannelPage exists
+              );
+            },
+            child: Text(
+              "View More",
+              style: TextStyle(color: const Color.fromARGB(255, 65, 66, 66), fontWeight: FontWeight.bold),
             ),
-          ),*/
-        ],
-      ),
-    );
-  }
+          ),
+      ],
+    ),
+  );
+}
+
+
+
+
+
 }
 class Doctor {
   final String name;
   final String specialty;
   final String distance;
-  final String imagePath;
+  final String imageUrl;  // Change to imageUrl
 
-  Doctor({
-    required this.name,
-    required this.specialty,
-    required this.distance,
-    required this.imagePath,
-  });
+  Doctor({required this.name, required this.specialty, required this.distance, required this.imageUrl});
+
+  static Doctor fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return Doctor(
+      name: data['name'],
+      specialty: data['specialty'],
+      distance: data['hospital'],
+      imageUrl: data['imageUrl'] as String? ?? '', // Provide a default URL
+    );
+  }
 }
