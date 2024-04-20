@@ -339,20 +339,17 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(
-  leading: IconButton(
-    icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
-    onPressed: () => Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Dashboard()),
+    appBar: AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Dashboard()),
+        ),
+      ),
+      title: const Text('Group Chat', style: TextStyle(color: Colors.white)),
+      backgroundColor: const Color.fromARGB(255, 22, 0, 147),
     ),
-  ),
-  title: Text(
-    'Group Chat',
-    style: TextStyle(color: Colors.white),
-  ),
-  backgroundColor: Color.fromARGB(255, 22, 0, 147),
-),
 
 
 

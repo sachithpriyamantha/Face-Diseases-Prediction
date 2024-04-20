@@ -58,6 +58,7 @@ dependencies:
   flutter_icons_null_safety: ^1.1.0
   tflite_flutter: ^0.10.4
   intl: ^0.19.0
+  geolocator: ^11.0.0
   
 
 

@@ -372,7 +372,7 @@ Widget _buildTile(IconData icon, String title, [VoidCallback? onTap]) {
 
 
 
-import 'package:face_diseases_app/Login/setting/settingpage.dart';
+import 'package:face_diseases_app/Pages/setting/settingpage.dart';
 import 'package:face_diseases_app/routing/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

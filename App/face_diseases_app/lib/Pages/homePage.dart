@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
         height: 60,
         items: <Widget>[
           Icon(Icons.home_outlined, size: 30),
-          
           Icon(Icons.dashboard_customize_outlined, size: 30),
           Icon(Icons.add_a_photo_outlined, size: 30,),
           Icon(Icons.message_outlined, size: 30),
@@ -103,7 +102,7 @@ class HomeContent extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Container(
-           
+          
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 30, 33, 128),
               borderRadius: BorderRadius.only(

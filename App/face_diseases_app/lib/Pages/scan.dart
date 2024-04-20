@@ -1115,7 +1115,9 @@ Widget build(BuildContext context) {
                   double confidence = result['confidence'] * 100;
                   String description = diseaseDescriptions[label] ?? "No description available";
                   return Card(
+                    
                     child: Container(
+                      
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1129,13 +1131,17 @@ Widget build(BuildContext context) {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            description,
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 16,
+                          Container(
+                              color: Color.fromARGB(255, 173, 242, 63), // Change this color for description background
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                description,
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
