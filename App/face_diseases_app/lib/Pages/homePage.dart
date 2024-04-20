@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           Dashboard(),
           ScanPage(),
           Chat(user: user!),
-          HomeScreen()
+          ProfilePage()
         ],
       ),
     );

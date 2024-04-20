@@ -540,7 +540,7 @@ class Dashboard extends StatelessWidget {
                                             videos: youtubeVideos)));
         break;
       case "Profile":
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
         break;
       case "Chat":
         final user = FirebaseAuth.instance.currentUser;

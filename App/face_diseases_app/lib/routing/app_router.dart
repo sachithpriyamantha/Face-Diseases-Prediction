@@ -18,7 +18,7 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) =>  HomeScreen(),
+          builder: (_) =>  ProfilePage(),
         );
         case Routes.dashboard:
         return MaterialPageRoute(
