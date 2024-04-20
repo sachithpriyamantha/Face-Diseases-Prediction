@@ -1,5 +1,3 @@
-
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -9,6 +7,8 @@ import 'package:face_diseases_app/Pages/PopularNews.dart';
 import 'package:face_diseases_app/Pages/channel.dart';
 import 'package:face_diseases_app/Pages/dashboard.dart';
 import 'package:face_diseases_app/Pages/scan.dart';
+import 'package:face_diseases_app/Pages/setting/settingpage.dart';
+import 'package:face_diseases_app/routing/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,51 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    return Scaffold(
+       var _scaffoldKey;
+       return Scaffold(
+      key: _scaffoldKey,
+      
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+      UserAccountsDrawerHeader(
+        accountName: Text(user?.displayName ?? 'Guest User'),
+        accountEmail: Text(user?.email ?? 'no-email@example.com'),
+        currentAccountPicture: CircleAvatar(
+          backgroundImage: user?.photoURL != null
+            ? NetworkImage(user!.photoURL!) as ImageProvider
+            : AssetImage('image/profile.png') as ImageProvider,
+        ),
+      ),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text('Dashboard'),
+              onTap: () {
+                // Handle Dashboard Tap
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Dashboard()));// Closes the drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Handle Settings Tap
+                Navigator.push(context, MaterialPageRoute(builder: (_) => SettingsPage()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamedAndRemoveUntil(Routes.loginScreen, (route) => false);
+              },
+            ),
+          ],
+        ),
+      ),
+      
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
@@ -113,7 +157,7 @@ class HomeContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                _buildTopBar(),
+                _buildTopBar(context),
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
@@ -262,8 +306,6 @@ Widget _buildNearbyDoctorsList(BuildContext context) {
   }
 
 
-
-
 Widget _buildPopularNews(BuildContext context) {
   List<Map<String, dynamic>> newsItems = [
     {
@@ -363,30 +405,29 @@ Widget _buildPopularNews(BuildContext context) {
   );
 }*/
 
-
-  Widget _buildTopBar() {
-    return SafeArea(
-      bottom: false,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Icon(Icons.menu, color: Colors.white),
-            CircleAvatar(
-              child: FirebaseAuth.instance.currentUser!.photoURL == null
-                  ? Image.asset('image/profile.png')
-                  : FadeInImage.assetNetwork(
-                      placeholder: 'image/loading.gif',
-                      image: FirebaseAuth.instance.currentUser!.photoURL!,
-                      fit: BoxFit.cover,
-                    ),
-            ),
-          ],
-        ),
+Widget _buildTopBar(BuildContext context) {
+  return SafeArea(
+    bottom: false,
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.menu, color: Colors.white),
+            onPressed: () => Scaffold.of(context).openDrawer(), // This will open the drawer
+          ),
+          CircleAvatar(
+            backgroundImage: FirebaseAuth.instance.currentUser!.photoURL == null
+                ? AssetImage('image/profile.png') as ImageProvider
+                : NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 
 
   Widget _buildSectionHeader(BuildContext context, String title) {
