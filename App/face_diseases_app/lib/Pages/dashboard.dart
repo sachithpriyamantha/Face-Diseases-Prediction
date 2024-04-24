@@ -338,7 +338,6 @@ class Dashboard extends StatelessWidget {
 
 
 
-
 import 'package:face_diseases_app/Chat/ui/screen/chat_screen.dart';
 import 'package:face_diseases_app/Login/screens/home/ui/home_sceren.dart';
 import 'package:face_diseases_app/Pages/Report.dart';
@@ -467,11 +466,12 @@ class Dashboard extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          color: Colors.blueAccent,
+          /*gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [Color.fromARGB(255, 22, 0, 147), Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 22, 0, 147)],
-          ),
+          ),*/
           boxShadow: const [BoxShadow(color: Colors.white, spreadRadius: 1, blurRadius: 6)],
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         ),
@@ -491,6 +491,7 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
+
 
   Widget buildDashboardItem(BuildContext context, int index) {
     return InkWell(

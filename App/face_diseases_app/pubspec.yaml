@@ -59,6 +59,7 @@ dependencies:
   tflite_flutter: ^0.10.4
   intl: ^0.19.0
   geolocator: ^11.0.0
+  flutter_staggered_animations: ^1.1.1
   
 
 
