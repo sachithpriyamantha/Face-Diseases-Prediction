@@ -466,12 +466,12 @@ class Dashboard extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blueAccent,
-          /*gradient: LinearGradient(
+          //color: Color.fromARGB(255, 167, 65, 226),
+          gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Color.fromARGB(255, 22, 0, 147), Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 22, 0, 147)],
-          ),*/
+            colors: [Color.fromARGB(255, 43, 24, 151), Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 22, 0, 147)],
+          ),
           boxShadow: const [BoxShadow(color: Colors.white, spreadRadius: 1, blurRadius: 6)],
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         ),
