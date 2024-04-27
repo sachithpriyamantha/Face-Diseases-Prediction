@@ -144,6 +144,23 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: AnimatedContainer(
+  duration: const Duration(milliseconds: 300),
+  height: 35,
+  width: 110,
+  decoration: BoxDecoration(
+    color: Colors.blueAccent,
+    borderRadius: BorderRadius.circular(5),
+    border: Border.all(color: Colors.transparent),
+  ),
+  child: const Center(
+    child: Icon(
+      Icons.info_outline, // This is the Material icon for "info"
+      color: Colors.white,
+    ),
+  ),
+),
+
+          /* child: AnimatedContainer(
               duration: const Duration(milliseconds:300),
               height: 35,
               width: 110,
@@ -155,7 +172,7 @@ class _HomePageState extends State<HomePage> {
               child: const Center(
                 child: Text('Info', style: TextStyle(color: Colors.white)),
               ),
-            ),
+            ),*/
           ),
         ],
       ),
