@@ -45,7 +45,7 @@ class _DailyReportPageState extends State<DailyReportPage> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('Daily Report', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 22, 0, 147),
+        backgroundColor: Color.fromARGB(255, 99, 172, 143),
       ),
       body: FutureBuilder<List<DocumentSnapshot>>(
         future: _futureReports,

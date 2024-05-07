@@ -162,7 +162,7 @@ class HomeContent extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
                       
-                 /* child: RichText(
+                /* child: RichText(
   textAlign: TextAlign.center,
   text: TextSpan(
     children: [
@@ -185,7 +185,9 @@ class HomeContent extends StatelessWidget {
       ),
     ],
   ),
-),*/    child: RichText(
+),*/   
+
+child: RichText(
   textAlign: TextAlign.center,
   text: TextSpan(
     children: [

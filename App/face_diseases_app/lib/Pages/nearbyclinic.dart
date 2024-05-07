@@ -64,7 +64,7 @@ class MapSampleState extends State<MapSample> {
           ),
         ),
         title: const Text('Dermatology Hospital', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 22, 0, 147),
+        backgroundColor: Color.fromARGB(255, 99, 172, 143),
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,

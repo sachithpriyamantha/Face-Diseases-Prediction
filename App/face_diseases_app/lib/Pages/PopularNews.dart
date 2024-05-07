@@ -15,7 +15,7 @@ class NewsPage extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('Popular News', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 22, 0, 147),
+        backgroundColor: Color.fromARGB(255, 99, 172, 143),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _db.collection('news').snapshots(),

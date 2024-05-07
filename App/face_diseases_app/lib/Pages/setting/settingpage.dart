@@ -31,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
         value ? darkTheme : lightTheme
       );
               },
-                  activeTrackColor: Colors.lightBlue,  // Add custom colors if needed
+                  activeTrackColor: Colors.lightBlue,
     activeColor: Colors.blueAccent,
             ),
           ),

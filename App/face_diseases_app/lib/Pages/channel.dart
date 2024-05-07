@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard())),
         ),
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 22, 0, 147),
+        backgroundColor: Color.fromARGB(255, 99, 172, 143),
         title: Container(
           height: 38,
           child: TextField(
