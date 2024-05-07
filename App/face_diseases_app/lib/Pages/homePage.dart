@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         backgroundColor: Colors.transparent,
-        color: Color.fromARGB(255, 55, 237, 240),
+        color: Color.fromARGB(255, 99, 172, 143),
         animationDuration: Duration(milliseconds: 300),
         height: 60,
         items: <Widget>[
@@ -148,7 +148,7 @@ class HomeContent extends StatelessWidget {
           Container(
           
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 30, 33, 128),
+              color: Color.fromARGB(255, 99, 172, 143),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -161,7 +161,8 @@ class HomeContent extends StatelessWidget {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-                  child: RichText(
+                      
+                 /* child: RichText(
   textAlign: TextAlign.center,
   text: TextSpan(
     children: [
@@ -173,20 +174,53 @@ class HomeContent extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+
       TextSpan(
         text: 'Face Guardian!',
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.yellow, // Change this color to the one you want for "Face Guardian"
+          color: Colors.yellow, 
         ),
       ),
     ],
   ),
+),*/    child: RichText(
+  textAlign: TextAlign.center,
+  text: TextSpan(
+    children: [
+      TextSpan(
+        text: 'Hi ',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+      TextSpan(
+        text: '${FirebaseAuth.instance.currentUser!.displayName}',  // User's name
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: const Color.fromARGB(255, 244, 238, 54),  // Change this color to whatever you prefer
+        ),
+      ),
+      TextSpan(
+        text: ',\nWelcome to Face Guardian!',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+  
+    ],
+  ),
 ),
 
+
                 ),
-                SizedBox(height: 16), // Adjust the space as per design
+                SizedBox(height: 16), 
               ],
             ),
           ),
@@ -197,14 +231,14 @@ class HomeContent extends StatelessWidget {
                 _buildSectionHeader(context, 'Empower Yourself'),
                 SizedBox(
           height: 150,
-          // Set the height of the slider here
+          
           child: CarouselSlider.builder(
             itemCount: carouselItems.length,
             itemBuilder: (context, index, realIndex) {
               final item = carouselItems[index];
               return Container(
               
-                // No need to set margins here if you're using SizedBox
+                
                 decoration: BoxDecoration(
                   color: item['color'],
                   borderRadius: BorderRadius.circular(15.0),
@@ -333,7 +367,7 @@ Widget _buildPopularNews(BuildContext context) {
       return Container(
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 174, 224, 234),
+          color: Color.fromARGB(255, 195, 240, 219),
           borderRadius: BorderRadius.circular(15.0),
           boxShadow: [
             BoxShadow(

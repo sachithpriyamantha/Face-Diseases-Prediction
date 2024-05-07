@@ -385,8 +385,10 @@ class Dashboard extends StatelessWidget {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
+
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 99, 172, 143),
       body: Column(
         children: [
           buildStaticHeader(context),
@@ -405,7 +407,7 @@ class Dashboard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 35, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -448,8 +450,9 @@ class Dashboard extends StatelessWidget {
                 const Text(
                   "Active now",
                   style: TextStyle(
+                    
                     fontSize: 18,
-                    color: Color.fromARGB(255, 136, 135, 135),
+                    color: Color.fromARGB(255, 192, 188, 188),
                     fontWeight: FontWeight.w900,
                     letterSpacing: 1,
                   ),
@@ -462,16 +465,18 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  Widget buildScrollableContent(BuildContext context) {
+ /*Widget buildScrollableContent(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
-          //color: Color.fromARGB(255, 167, 65, 226),
-          gradient: LinearGradient(
+          color: Colors.white,
+          /*gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Color.fromARGB(255, 43, 24, 151), Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 22, 0, 147)],
-          ),
+            colors:[Color.fromARGB(255, 255, 255, 255), 
+           // Colors.orange, 
+            Colors.indigo],
+          ),*/
           boxShadow: const [BoxShadow(color: Colors.white, spreadRadius: 1, blurRadius: 6)],
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         ),
@@ -490,18 +495,48 @@ class Dashboard extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
+Widget buildScrollableContent(BuildContext context) {
+  return SingleChildScrollView(
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+      ),
+      width: width,
+      padding: const EdgeInsets.only(bottom: 20),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2 / 1.4,  // Adjusted aspect ratio for a more square-like appearance
+          mainAxisSpacing: 35,  // Further reduced spacing
+          crossAxisSpacing: 15,  // Consistent spacing for visual balance
+        ),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: imgData.length,
+        itemBuilder: (context, index) => buildDashboardItem(context, index),
+      ),
+    ),
+  );
+}
 
 
-  Widget buildDashboardItem(BuildContext context, int index) {
+
+
+
+  /*Widget buildDashboardItem(BuildContext context, int index) {
+    
     return InkWell(
+      
       onTap: () => handleCardTap(context, index),
       child: Container(
+       
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 0, 0, 0),
-          boxShadow: const [BoxShadow(color: Colors.white, spreadRadius: 1, blurRadius: 6)],
+          color: Color.fromARGB(255, 60, 188, 111),
+          boxShadow: const [BoxShadow(color: Color.fromARGB(255, 249, 210, 210), spreadRadius: 1, blurRadius: 6)],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -516,6 +551,41 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
+*/
+Widget buildDashboardItem(BuildContext context, int index) {
+  return InkWell(
+    onTap: () => handleCardTap(context, index),
+    child: Container(
+      margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),  // Further reduced margins
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Color.fromARGB(255, 66, 131, 105),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(100, 0, 0, 0),  // Softer shadow
+            spreadRadius: 0,
+            blurRadius: 6,
+            offset: Offset(0, 3),  // Slight vertical offset for depth
+          )
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(imgData[index], width: 80),  // Slightly smaller images
+          Text(
+            titles[index],
+            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),  // Smaller text
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+
+
+
 
   void handleCardTap(BuildContext context, int index) {
     // Navigate to different screens based on the tapped title

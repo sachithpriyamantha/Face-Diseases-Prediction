@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            child: AnimatedContainer(
+            /*child: AnimatedContainer(
   duration: const Duration(milliseconds: 300),
   height: 35,
   width: 110,
@@ -158,9 +158,9 @@ class _HomePageState extends State<HomePage> {
       color: Colors.white,
     ),
   ),
-),
+),*/
 
-          /* child: AnimatedContainer(
+          child: AnimatedContainer(
               duration: const Duration(milliseconds:300),
               height: 35,
               width: 110,
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
               child: const Center(
                 child: Text('Info', style: TextStyle(color: Colors.white)),
               ),
-            ),*/
+            ),
           ),
         ],
       ),

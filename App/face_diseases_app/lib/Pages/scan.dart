@@ -944,6 +944,7 @@ Map<String, String> diseaseDescriptions = {
 
 
 
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -1152,7 +1153,7 @@ Widget build(BuildContext context) {
         )
       ],
     ),
-    floatingActionButton: Row(
+   /* floatingActionButton: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         FloatingActionButton(
@@ -1169,7 +1170,30 @@ Widget build(BuildContext context) {
           child: const Icon(Icons.camera_alt),
         ),
       ],
-    ),
+    ),*/
+
+    floatingActionButton: Padding(
+  padding: const EdgeInsets.only(bottom: 50),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: <Widget>[
+      FloatingActionButton(
+        onPressed: pickImage2,
+        tooltip: "Pick Image from Gallery",
+        backgroundColor: const Color.fromARGB(255, 252, 254, 248),
+        child: const Icon(Icons.image),
+      ),
+      const SizedBox(width: 15),
+      FloatingActionButton(
+        onPressed: pickImage,
+        tooltip: "Take a Picture",
+        backgroundColor: const Color.fromARGB(255, 252, 254, 248),
+        child: const Icon(Icons.camera_alt),
+      ),
+    ],
+  ),
+),
+
   );
 }
 
@@ -1192,3 +1216,6 @@ Widget build(BuildContext context) {
     }
   }
 }
+
+
+
