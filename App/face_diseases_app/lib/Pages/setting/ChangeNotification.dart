@@ -2,7 +2,7 @@ import 'package:face_diseases_app/Pages/setting/settingpage.dart';
 import 'package:face_diseases_app/Pages/setting/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
- // Adjust import as needed
+
 
 void main() {
   runApp(MyApp());

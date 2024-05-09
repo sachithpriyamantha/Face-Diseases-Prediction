@@ -1,23 +1,9 @@
-/*class User {
-  final String name;
-  final String username;
-  //final String contact;
-  final String image;
-  final String info;
-  bool isFollowedByMe;
-  
-
-  User(this.name, this.username,  this.image,this.info,this.isFollowedByMe);
-
-  get followersCount => null;
-}*/
-
 
 
 class User {
   final String id;
   final String name;
-  final String username; // This could be the hospital name or similar
+  final String username;
   final String image;
   final String info;
   final bool isFollowedByMe;

@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
               onTap: () {
-                // Handle Dashboard Tap
+                
                 Navigator.push(context, MaterialPageRoute(builder: (_) => Dashboard()));// Closes the drawer
               },
             ),
@@ -67,7 +67,6 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.settings),
               title: Text('Settings'),
               onTap: () {
-                // Handle Settings Tap
                 Navigator.push(context, MaterialPageRoute(builder: (_) => SettingsPage()));
               },
             ),
@@ -119,7 +118,7 @@ class HomeContent extends StatelessWidget {
     Doctor(name: 'Dr. (MRS) P. SENAKA', specialty: 'Dermatologist', distance: 'Hambantota Hospital', imageUrl: 'https://i1.rgstatic.net/ii/profile.image/751258864480260-1556125479393_Q512/Indira-Kahawita.jpg'),
     Doctor(name: 'Dr. S. ABEYKEERTHI', specialty: 'Dermatologist', distance: 'Anuradhapura Hospital', imageUrl: 'https://groundviews.org/wp-content/uploads/2012/08/Screen-Shot-2012-08-27-at-11.37.32-PM.jpg'),
     Doctor(name: 'Dr. UWAYSE AHAMED', specialty: 'Dermatologist', distance: 'Colombo Hospital', imageUrl: 'https://www.happysrilankans.com/wp-content/uploads/2020/11/Dr.-Uvais-Ahamed.jpg'),
-    // ... more doctors
+  
   ];
   @override
   Widget build(BuildContext context) {
@@ -162,30 +161,7 @@ class HomeContent extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
                       
-                /* child: RichText(
-  textAlign: TextAlign.center,
-  text: TextSpan(
-    children: [
-      TextSpan(
-        text: 'Hi ${FirebaseAuth.instance.currentUser!.displayName},\nWelcome to ',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
 
-      TextSpan(
-        text: 'Face Guardian!',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.yellow, 
-        ),
-      ),
-    ],
-  ),
-),*/   
 
 child: RichText(
   textAlign: TextAlign.center,
@@ -200,11 +176,11 @@ child: RichText(
         ),
       ),
       TextSpan(
-        text: '${FirebaseAuth.instance.currentUser!.displayName}',  // User's name
+        text: '${FirebaseAuth.instance.currentUser!.displayName}',
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: const Color.fromARGB(255, 244, 238, 54),  // Change this color to whatever you prefer
+          color: const Color.fromARGB(255, 244, 238, 54),
         ),
       ),
       TextSpan(
@@ -273,10 +249,10 @@ child: RichText(
                   ),
                 ),
                 ),
-          _buildSectionHeader(context, 'Doctors'), // Doctors section with "View More"
+          _buildSectionHeader(context, 'Doctors'),
           _buildNearbyDoctorsList(context),
-          _buildSectionHeader(context, 'Popular News'), // No "View More" for other sections
-          _buildPopularNews(context),// New widget for popular news
+          _buildSectionHeader(context, 'Popular News'),
+          _buildPopularNews(context),
               ],
             ),
           ),
@@ -287,14 +263,14 @@ child: RichText(
 
 Widget _buildNearbyDoctorsList(BuildContext context) {
     return Container(
-      height: 170.0, // Set a height that suits your design
+      height: 170.0, 
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: doctors.length,
         itemBuilder: (context, index) {
           final doctor = doctors[index];
           return Container(
-            width: 200.0, // Set a width that suits your design
+            width: 200.0, 
             padding: EdgeInsets.all(8.0),
             child: Card(
               shape: RoundedRectangleBorder(
@@ -381,7 +357,7 @@ Widget _buildPopularNews(BuildContext context) {
         ),
         child: ListTile(
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0), // Rounded corners for the image
+            borderRadius: BorderRadius.circular(8.0),
             child: Image.network(item['imageUrl'], width: 80, height: 80, fit: BoxFit.cover),
           ),
           title: Text(
@@ -395,51 +371,6 @@ Widget _buildPopularNews(BuildContext context) {
   );
 }
 
-/*Widget _buildPopularNews(BuildContext context) {
-  final Stream<QuerySnapshot> _newsStream = FirebaseFirestore.instance.collection('news').snapshots();
-
-  return StreamBuilder<QuerySnapshot>(
-    stream: _newsStream,
-    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-      if (snapshot.hasError) {
-        return Text('Something went wrong');
-      }
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return Text("Loading");
-      }
-      return Column(
-        children: snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map<String, dynamic> news = document.data()! as Map<String, dynamic>;
-          return Container(
-            margin: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 205, 208, 209),
-              borderRadius: BorderRadius.circular(15.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 5.0,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: ListTile(
-              leading: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(news['imageUrl'], width: 80, height: 80, fit: BoxFit.cover),
-              ),
-              title: Text(
-                news['title'],
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(news['description']),
-            ),
-          );
-        }).toList(),
-      );
-    },
-  );
-}*/
 
 Widget _buildTopBar(BuildContext context) {
   return SafeArea(
@@ -451,7 +382,7 @@ Widget _buildTopBar(BuildContext context) {
         children: <Widget>[
           IconButton(
             icon: Icon(Icons.menu, color: Colors.white),
-            onPressed: () => Scaffold.of(context).openDrawer(), // This will open the drawer
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
           CircleAvatar(
             backgroundImage: FirebaseAuth.instance.currentUser!.photoURL == null
@@ -476,12 +407,12 @@ Widget _buildTopBar(BuildContext context) {
           title,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        if (title == "Doctors")  // Only for the Doctors section
+        if (title == "Doctors")
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChannelPage()), // Assuming ChannelPage exists
+                MaterialPageRoute(builder: (context) => ChannelPage()),
               );
             },
             child: Text(
@@ -489,12 +420,12 @@ Widget _buildTopBar(BuildContext context) {
               style: TextStyle(color: const Color.fromARGB(255, 65, 66, 66), fontWeight: FontWeight.bold),
             ),
           ),
-                  if (title == "Popular News")  // Only for the Doctors section
+                  if (title == "Popular News")
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewsPage()), // Assuming ChannelPage exists
+                MaterialPageRoute(builder: (context) => NewsPage()),
               );
             },
             child: Text(
@@ -516,7 +447,7 @@ class Doctor {
   final String name;
   final String specialty;
   final String distance;
-  final String imageUrl;  // Change to imageUrl
+  final String imageUrl;
 
   Doctor({required this.name, required this.specialty, required this.distance, required this.imageUrl});
 
@@ -526,7 +457,7 @@ class Doctor {
       name: data['name'],
       specialty: data['specialty'],
       distance: data['hospital'],
-      imageUrl: data['imageUrl'] as String? ?? '', // Provide a default URL
+      imageUrl: data['imageUrl'] as String? ?? '',
     );
   }
 }

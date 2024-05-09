@@ -9,6 +9,6 @@ class ThemeProvider extends ChangeNotifier {
 
   void setTheme(ThemeData themeData) {
     _themeData = themeData;
-    notifyListeners();  // This notifies all the listeners about the theme change.
+    notifyListeners();
   }
 }

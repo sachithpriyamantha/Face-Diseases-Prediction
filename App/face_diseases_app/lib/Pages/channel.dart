@@ -78,7 +78,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+            color: Color.fromARGB(255, 253, 253, 253),
+          /*gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
               Color.fromARGB(255, 157, 235, 179),
               Color.fromARGB(255, 241, 169, 169),
             ],
-          ),
+          ),*/
         ),
         child: ListView.builder(
           itemCount: _filteredUsers.length,
@@ -143,29 +144,13 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            /*child: AnimatedContainer(
-  duration: const Duration(milliseconds: 300),
-  height: 35,
-  width: 110,
-  decoration: BoxDecoration(
-    color: Colors.blueAccent,
-    borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: Colors.transparent),
-  ),
-  child: const Center(
-    child: Icon(
-      Icons.info_outline, // This is the Material icon for "info"
-      color: Colors.white,
-    ),
-  ),
-),*/
 
           child: AnimatedContainer(
               duration: const Duration(milliseconds:300),
               height: 35,
               width: 110,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color.fromARGB(255, 99, 172, 143),
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.transparent),
               ),

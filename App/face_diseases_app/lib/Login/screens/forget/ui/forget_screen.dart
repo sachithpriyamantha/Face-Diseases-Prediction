@@ -49,7 +49,7 @@ class ForgetScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min, // Ensure minimum height
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const TermsAndConditionsText(),
                     Gap(24.h),

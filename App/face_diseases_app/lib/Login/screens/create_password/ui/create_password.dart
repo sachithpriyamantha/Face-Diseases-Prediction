@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:face_diseases_app/Login/core/widgets/login_and_signup_animated_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../core/widgets/login_and_signup_animated_form.dart';
 import '../../../core/widgets/terms_and_conditions_text.dart';
 import '../../../theming/styles.dart';
 

@@ -1,10 +1,10 @@
+import 'package:face_diseases_app/Login/core/widgets/login_and_signup_animated_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/widgets/already_have_account_text.dart';
-import '../../../core/widgets/login_and_signup_animated_form.dart';
 import '../../../core/widgets/sign_in_with_google_text.dart';
 import '../../../core/widgets/terms_and_conditions_text.dart';
 import '../../../helpers/google_sign_in.dart';

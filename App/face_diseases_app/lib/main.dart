@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: router.generateRoute,
           debugShowCheckedModeBanner: false,
           initialRoute: initialRoute,
+          
         );
       },
     );

@@ -44,7 +44,7 @@ class NewsPage extends StatelessWidget {
                           children: [
                             if (data['imageUrl'].isNotEmpty)
                               Image.network(data['imageUrl'], width: 100, height: 100, fit: BoxFit.cover),
-                            SizedBox(width: 10), // Space between image and title/description
+                            SizedBox(width: 10), 
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,7 @@ class NewsPage extends StatelessWidget {
                                     data['title'],
                                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                   ),
-                                  SizedBox(height: 5), // Space between title and description
+                                  SizedBox(height: 5),
                                   Text(
                                     data['description'],
                                     style: TextStyle(fontSize: 14),

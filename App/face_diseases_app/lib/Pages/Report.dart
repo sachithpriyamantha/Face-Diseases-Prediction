@@ -30,7 +30,7 @@ class _DailyReportPageState extends State<DailyReportPage> {
         .get();
 
     for (var doc in querySnapshot.docs) {
-      print(doc.data()); // Debugging print
+      print(doc.data());
     }
 
     return querySnapshot.docs;
@@ -62,7 +62,7 @@ class _DailyReportPageState extends State<DailyReportPage> {
               itemBuilder: (context, index) {
                 var data = snapshot.data![index].data() as Map<String, dynamic>;
                 var dateStr = data['date'] ?? 'Unknown date';
-                // Adjust the format if needed to match the format of your date strings
+            
                 var formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
                     .format(DateTime.parse(dateStr));
                 var results = List.from(data['results']).map((result) {
@@ -71,31 +71,30 @@ class _DailyReportPageState extends State<DailyReportPage> {
                   double confidence = result['confidence'] as double;
                   String confidencePercent =
                       (confidence * 100).toStringAsFixed(2) + '%';
-                  // Combine label and confidence score
+            
                   return '$label\nConfidence: $confidencePercent';
-                }).join('\n\n'); // Separate different results
-
+                }).join('\n\n');
                 return Card(
-                  elevation: 4.0, // Adjust elevation to your preference
+                  elevation: 4.0, 
                   shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(15), // Adjust the corner radius
+                        BorderRadius.circular(15), 
                   ),
                   margin: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 6), // Adjust the margin
+                      horizontal: 10, vertical: 6), 
                   child: ListTile(
                     title: Text(formattedDate,
                         style: TextStyle(color: Colors.blue)),
                     subtitle: Padding(
                       padding: const EdgeInsets.all(
-                          8.0), // Add padding inside the card
+                          8.0), 
                       child: Text(results,
                           style:
-                              TextStyle(fontSize: 16)), // Style subtitle text
+                              TextStyle(fontSize: 16)),
                     ),
                     isThreeLine: true,
                     contentPadding:
-                        const EdgeInsets.all(10), // Padding inside ListTile
+                        const EdgeInsets.all(10), 
                   ),
                 );
               },

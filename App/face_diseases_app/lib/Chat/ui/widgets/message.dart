@@ -18,12 +18,15 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set different background colors for sent and received messages
+    
+    
+
     Color backgroundColor = me ? Colors.lightBlueAccent : Colors.grey[300]!;
     Color textColor = me ? Colors.white : Colors.black;
 
     return Align(
-      // Align messages to the right if sent by the user, otherwise to the left
+    
+    
       alignment: me ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -36,7 +39,7 @@ class Message extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3), 
             ),
           ],
         ),
