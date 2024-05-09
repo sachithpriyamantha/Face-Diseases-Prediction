@@ -98,26 +98,42 @@ class Dashboard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Text(
-                  "How can help you Today?",
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1,
-                  ),
-                ),
+  "How can help you Today?",
+  style: TextStyle(
+    fontSize: 25,
+    color: Colors.white,
+    fontWeight: FontWeight.w900,
+    letterSpacing: 1,
+    shadows: [
+      Shadow(
+        offset: Offset(2.0, 2.0),
+        blurRadius: 3.0,
+        color: Colors.black.withOpacity(0.5),
+      ),
+    ],
+  ),
+),
+
                 const SizedBox(height: 1),
-                const Text(
-                  "Active now",
-                  style: TextStyle(
-                    
-                    fontSize: 18,
-                    color: Color.fromARGB(255, 202, 241, 185),
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1,
-                  ),
-                ),
+Text(
+  "Active now",
+  style: TextStyle(
+    fontSize: 18,
+    color: Color.fromARGB(255, 187, 248, 250),
+    fontWeight: FontWeight.w900,
+    letterSpacing: 1,
+    shadows: [
+      Shadow(
+        offset: Offset(1.0, 1.0),
+        blurRadius: 3.0,
+        color: Colors.black.withOpacity(0.5),
+      ),
+    ],
+  ),
+),
+
               ],
             ),
           ),

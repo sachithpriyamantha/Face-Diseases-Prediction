@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              Gap(20.h), // Adjusted the gap to compensate for the removed image
+              Gap(20.h),
               EmailAndPassword(),
               Gap(10.h),
               const SigninWithGoogleText(),

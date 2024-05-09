@@ -64,6 +64,6 @@ class TextStyles {
   static TextStyle font11MediumLightShadeOfGray400Weight = TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeight.w400,
-    color: ColorsManager.mediumLightShadeOfGray,
+    color: Color.fromARGB(255, 133, 129, 129),
   );
 }
