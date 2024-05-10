@@ -145,21 +145,32 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> carouselItems = [
+                  {
+        'image': 'image/problem.jpg',
+        'text': 'Problems',
+        'color': Colors.orange,
+      },
       {
-        'image': 'image/facelearn.webp',
-        'text': 'Learn Face Diseases',
+        'image': 'image/facescan.jpg',
+        'text': 'Face Diseases Scaning',
         'color': Colors.blue,
       },
       {
-        'image': 'image/effect.jpg',
-        'text': 'Communicate Effectively',
+        'image': 'image/chat.jpg',
+        'text': 'A group chat to Ask Questions',
+        'color': Colors.green,
+      },
+            {
+        'image': 'image/loca.jpg',
+        'text': 'Nearby Hospital',
         'color': Colors.green,
       },
       {
-        'image': 'image/ex.jpg',
-        'text': 'Explore Resources',
+        'image': 'image/videol.jpg',
+        'text': 'Learn Video for Diseases',
         'color': Colors.orange,
       },
+
     ];
 
     return Scaffold(
@@ -239,90 +250,13 @@ class HomeContent extends StatelessWidget {
             ),
           ),
 
-          /* Container(
-  decoration: BoxDecoration(
-    color: Color.fromARGB(255, 99, 172, 143),
-    borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(30),
-      bottomRight: Radius.circular(30),
-    ),
-  ),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: <Widget>[
-      _buildTopBar(context),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-        child: Column(
-          children: [
-            Image.asset(
-              'image/logo.png', // Replace with your image path
-              height: 100, // Adjust the height as needed
-              fit: BoxFit.contain,
-            ),
-            SizedBox(height: 20), // Add some space between the image and text
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Hi ',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(3.0, 3.0),
-                          blurRadius: 3.0,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
-                  TextSpan(
-                    text: '${FirebaseAuth.instance.currentUser!.displayName}',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 244, 238, 54),
-                      shadows: [
-                        Shadow(
-                          offset: Offset(3.0, 3.0),
-                          blurRadius: 3.0,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
-                  TextSpan(
-                    text: ',\nWelcome to Face Guardian!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 3.0,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      SizedBox(height: 16),
-    ],
-  ),
-),*/
+
+
+
+
 
           Expanded(
-            child: ListView(
+            /*child: ListView(
               padding: EdgeInsets.only(top: 20),
               children: <Widget>[
                 _buildSectionHeader(context, 'Empower Yourself'),
@@ -370,7 +304,72 @@ class HomeContent extends StatelessWidget {
                 _buildSectionHeader(context, 'Popular News'),
                 _buildPopularNews(context),
               ],
-            ),
+            ),*/
+            child: ListView(
+  padding: EdgeInsets.only(top: 20),
+  children: <Widget>[
+    _buildSectionHeader(context, 'Empower Yourself'),
+    SizedBox(
+      height: 150,
+      child: CarouselSlider.builder(
+        itemCount: carouselItems.length,
+        itemBuilder: (context, index, realIndex) {
+          final item = carouselItems[index];
+          return Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: item['color'],
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: AssetImage(item['image']),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.3),
+                      BlendMode.darken,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                left: 10,
+                right: 10,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 58, 57, 57).withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Text(
+                    item['text'],
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+        options: CarouselOptions(
+          autoPlay: true,
+          enlargeCenterPage: true,
+          viewportFraction: 0.8,
+          aspectRatio: 2.0,
+        ),
+      ),
+    ),
+    _buildSectionHeader(context, 'Doctors'),
+    _buildNearbyDoctorsList(context),
+    _buildSectionHeader(context, 'Popular News'),
+    _buildPopularNews(context),
+  ],
+),
+
           ),
         ],
       ),

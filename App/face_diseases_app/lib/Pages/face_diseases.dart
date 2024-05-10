@@ -82,7 +82,7 @@ class _ListViewPageState extends State<ListViewPage> {
           'Face Diseases',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromARGB(255, 22, 0, 147),
+        backgroundColor: Color.fromARGB(255, 99, 172, 143),
       ),
 
       /**********************************************Body*************************************************/
@@ -115,7 +115,7 @@ class _ListViewPageState extends State<ListViewPage> {
                           titleList[index],
                           style: TextStyle(
                             fontSize: 25,
-                            color: Color.fromARGB(255, 6, 23, 255),
+                            color: Color.fromARGB(168, 255, 6, 6),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

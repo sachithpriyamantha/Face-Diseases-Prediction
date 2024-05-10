@@ -150,6 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('image/sachiogo.png', height: 150.h), // Add logo here
+              Gap(20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(

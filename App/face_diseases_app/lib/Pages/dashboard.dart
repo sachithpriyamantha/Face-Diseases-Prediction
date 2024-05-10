@@ -5,6 +5,7 @@ import 'package:face_diseases_app/Pages/Report.dart';
 import 'package:face_diseases_app/Pages/about.dart';
 import 'package:face_diseases_app/Pages/channel.dart';
 import 'package:face_diseases_app/Pages/face_diseases.dart';
+import 'package:face_diseases_app/Pages/feadback.dart';
 import 'package:face_diseases_app/Pages/nearbyclinic.dart';
 import 'package:face_diseases_app/Pages/scan.dart';
 import 'package:face_diseases_app/Pages/video.dart';
@@ -23,8 +24,10 @@ class Dashboard extends StatelessWidget {
     "image/diseases.png",
     "image/clinic.png",
     "image/doctor.png",
-    "image/learn.png",
     "image/chat.png",
+    "image/learn.png",
+    
+    "image/feedback.png",
     "image/about.png",
     "image/profile.png",
   ];
@@ -35,8 +38,10 @@ class Dashboard extends StatelessWidget {
     "Face Diseases",
     "Near By Clinic",
     "Doctors",
-    "Learn Videos",
     "Chat",
+    "Learn Videos",
+    
+    "Feedback",
     "About",
     "Profile",
   ];
@@ -155,8 +160,8 @@ Widget buildScrollableContent(BuildContext context) {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 2 / 1.4,
-          mainAxisSpacing: 35,
-          crossAxisSpacing: 15,
+          mainAxisSpacing: 47,
+          crossAxisSpacing: 12,
         ),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -180,10 +185,10 @@ Widget buildDashboardItem(BuildContext context, int index) {
         color: Color.fromARGB(255, 66, 131, 105),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(95, 15, 16, 16),
-            spreadRadius: 5,
-            blurRadius: 6,
-            offset: Offset(0, 3),
+            color: Color.fromARGB(95, 122, 179, 102),
+            spreadRadius: 7,
+            blurRadius: 3,
+            offset: Offset(0, 5),
           )
         ],
       ),
@@ -216,6 +221,9 @@ Widget buildDashboardItem(BuildContext context, int index) {
         break;
       case "Face Diseases":
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => FaceDiseasesPage()));
+        break;
+        case "Feedback":
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => FeedbackForm()));
         break;
       case "Near By Clinic":
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => NearByClinicPage()));

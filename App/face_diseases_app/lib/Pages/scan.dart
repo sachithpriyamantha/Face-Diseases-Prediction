@@ -186,16 +186,24 @@ Widget build(BuildContext context) {
                           ),
                           const SizedBox(height: 8),
                           Container(
-                              color: Color.fromARGB(255, 173, 242, 63), 
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                description,
-                                style: const TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
+  //color: Color.fromARGB(255, 156, 189, 105),
+  padding: const EdgeInsets.all(8),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(16.0), // Adjust the radius value to your preference
+    child: Container(
+      color: Color.fromARGB(255, 156, 189, 105), // Color of the inner container
+      padding: const EdgeInsets.all(10),
+      child: Text(
+        description,
+        style: const TextStyle(
+          color: Colors.black87,
+          fontSize: 16,
+        ),
+      ),
+    ),
+  ),
+),
+
                         ],
                       ),
                     ),

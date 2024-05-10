@@ -25,6 +25,14 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(
+                  child: Image.asset(
+                    'image/sachiogo.png',
+                    height: 100.h,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Gap(20.h),
                 Text(
                   'Create Account',
                   style: TextStyles.font24Blue700Weight,
