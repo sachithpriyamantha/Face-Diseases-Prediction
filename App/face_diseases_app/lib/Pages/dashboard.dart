@@ -54,7 +54,7 @@ class Dashboard extends StatelessWidget {
 
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 99, 172, 143),
+      backgroundColor: Color.fromARGB(255, 69, 84, 255),
       body: Column(
         children: [
           buildStaticHeader(context),
@@ -111,13 +111,13 @@ class Dashboard extends StatelessWidget {
     color: Colors.white,
     fontWeight: FontWeight.w900,
     letterSpacing: 1,
-    shadows: [
+    /*shadows: [
       Shadow(
         offset: Offset(2.0, 2.0),
         blurRadius: 3.0,
         color: Colors.black.withOpacity(0.5),
       ),
-    ],
+    ],*/
   ),
 ),
 
@@ -125,17 +125,17 @@ class Dashboard extends StatelessWidget {
 Text(
   "Active now",
   style: TextStyle(
-    fontSize: 18,
-    color: Color.fromARGB(255, 187, 248, 250),
+    fontSize: 25,
+    color: Color.fromARGB(255, 255, 234, 0),
     fontWeight: FontWeight.w900,
     letterSpacing: 1,
-    shadows: [
+    /*shadows: [
       Shadow(
         offset: Offset(1.0, 1.0),
         blurRadius: 3.0,
         color: Colors.black.withOpacity(0.5),
       ),
-    ],
+    ],*/
   ),
 ),
 
@@ -182,10 +182,10 @@ Widget buildDashboardItem(BuildContext context, int index) {
       margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Color.fromARGB(255, 66, 131, 105),
+        color:  Color.fromARGB(255, 255, 255, 255),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(95, 122, 179, 102),
+            color: Color.fromARGB(255, 123, 161, 255),
             spreadRadius: 7,
             blurRadius: 3,
             offset: Offset(0, 5),
@@ -198,7 +198,7 @@ Widget buildDashboardItem(BuildContext context, int index) {
           Image.asset(imgData[index], width: 80),
           Text(
             titles[index],
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Color.fromARGB(255, 15, 14, 14), fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ],
       ),

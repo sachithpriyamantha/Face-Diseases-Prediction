@@ -19,7 +19,8 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   GoogleMapController? mapController;
-  final LatLng _center = const LatLng(7.8731, 80.7718); // Coordinates of Sri Lanka
+  // Coordinates of Sri Lanka
+  final LatLng _center = const LatLng(7.8731, 80.7718); 
 
   Set<Marker> _markers = {};
 
@@ -64,7 +65,7 @@ class MapSampleState extends State<MapSample> {
           ),
         ),
         title: const Text('Dermatology Hospital', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: const Color.fromARGB(255, 69, 84, 255),
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,

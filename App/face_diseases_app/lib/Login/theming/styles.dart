@@ -7,34 +7,34 @@ class TextStyles {
   static TextStyle font24Blue700Weight = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w700,
-    color: ColorsManager.mainBlue,
+    color: const Color.fromARGB(255, 0, 19, 48),
   );
 
   static TextStyle font14Blue400Weight = TextStyle(
     fontSize: 14.sp,
-    fontWeight: FontWeight.w400,
-    color: ColorsManager.mainBlue,
+    fontWeight: FontWeight.w900,
+    color: Color.fromARGB(255, 255, 111, 0),
   );
 
   static TextStyle font16White600Weight = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
+    color: Color.fromARGB(255, 255, 255, 255),
   );
   static TextStyle font13Grey400Weight = TextStyle(
     fontSize: 13.sp,
     fontWeight: FontWeight.w400,
-    color: ColorsManager.gray,
+    color: Color.fromARGB(255, 0, 0, 0),
   );
   static TextStyle font14Grey400Weight = TextStyle(
     fontSize: 14.sp,
-    fontWeight: FontWeight.w400,
-    color: ColorsManager.gray,
+    fontWeight: FontWeight.w900,
+    color: Color.fromARGB(255, 0, 15, 184),
   );
   static TextStyle font14Hint500Weight = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
-    color: ColorsManager.gray76,
+    color: Color.fromARGB(255, 131, 131, 131),
   );
   static TextStyle font14DarkBlue500Weight = TextStyle(
     fontSize: 14.sp,
@@ -59,11 +59,11 @@ class TextStyles {
   static TextStyle font11Blue600Weight = TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeight.w600,
-    color: ColorsManager.mainBlue,
+    color: Color.fromARGB(255, 42, 0, 208),
   );
   static TextStyle font11MediumLightShadeOfGray400Weight = TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeight.w400,
-    color: Color.fromARGB(255, 133, 129, 129),
+    color: Color.fromARGB(255, 0, 102, 125),
   );
 }

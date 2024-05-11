@@ -11,7 +11,7 @@ class BuildNoInternet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/no-internet.png',
+            'image/sachiogo.png',
           ),
         ],
       ),

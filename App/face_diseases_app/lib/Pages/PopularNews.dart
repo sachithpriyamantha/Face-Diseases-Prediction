@@ -11,11 +11,11 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('Popular News', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: const Color.fromARGB(255, 69, 84, 255),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _db.collection('news').snapshots(),
@@ -51,7 +51,7 @@ class NewsPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     data['title'],
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color.fromARGB(255, 34, 0, 255)),
                                   ),
                                   SizedBox(height: 5),
                                   Text(

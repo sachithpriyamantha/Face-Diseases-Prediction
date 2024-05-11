@@ -57,9 +57,19 @@ Map<String, String> diseaseDescriptions = {
           "5. Watch Your Diet: Some people find that certain foods, especially those high in dairy and sugar, can trigger acne. Keeping a food diary may help you identify and avoid these triggers.\n\n"
           "6. Manage Stress: High stress levels can increase the hormone cortisol, exacerbating acne. Try stress-reduction techniques such as yoga, meditation, or deep breathing.\n\n"
           "7. Protect Your Skin: Use sunscreen designed for the face with at least SPF 30. Sun exposure can damage your skin and lead to more acne flare-ups.",
-  "atopic dermatitis": "An inflammatory skin disease known as eczema, which is characterized by itchy, red, swollen, and cracked skin patches.",
-  "eczema": "A medical condition that causes the skin to become itchy, dry, cracked, sore, and red.",
-  "seborrheic keratoses": "A common skin growth that looks like a wart, typically appears as brown, black or light tan spots on the face, chest, shoulders or back.",
+  "atopic dermatitis": "1. Diagnosis and Assessment:Visit a healthcare provider for an accurate diagnosis, ruling out other conditions. Identify any specific triggers, such as allergens, irritants, or stress, that may worsen symptoms.\n\n"
+                      "2. Avoid Triggers: Recognize and avoid known allergens (pollen, dust mites, etc.) and irritants (soaps, synthetic fabrics, etc.). Maintain an even temperature and humidity to reduce skin irritation.\n\n"
+                      "3. Skin Care Routine: Use gentle, fragrance-free cleansers and avoid hot water during bathing. Apply a moisturizer within three minutes of bathing to lock in moisture, and reapply it frequently throughout the day.",
+  "eczema": "Eczema, also known as atopic dermatitis, is a condition that causes inflamed, itchy, and often cracked skin. Here is a step-by-step guide to help manage eczema effectively \n\n"
+            "1. Diagnosis and Identification:Consult a healthcare provider for accurate diagnosis. Identify triggers like allergens, irritants, and environmental factors.\n\n"
+            "2. Avoid Triggers: Identify and avoid specific allergens (e.g., dust mites, pet dander) and irritants (e.g., harsh soaps, synthetic fabrics). Maintain stable temperature and humidity levels to reduce skin irritation.\n\n"
+            "3. Skincare Routine:Bathe with lukewarm water and use mild, fragrance-free cleansers. Pat the skin dry and immediately apply a thick moisturizer or emollient to retain moisture.\n\n"
+            "4. Topical Treatments: Apply corticosteroid creams/ointments or calcineurin inhibitors (like tacrolimus) as prescribed by a healthcare provider to reduce inflammation. Use non-steroidal creams like crisaborole for mild eczema.",
+  "seborrheic keratoses": "Seborrheic keratoses are common, benign skin growths that often appear in older adults. Though generally harmless, they can be removed if they cause discomfort or for cosmetic reasons. Here’s a step-by-step guide for managing seborrheic keratoses:\n\n"
+                        "1. Consultation and Diagnosis: Visit a healthcare provider or dermatologist for an accurate diagnosis. Differentiate seborrheic keratoses from other skin conditions, particularly skin cancers.\n\n"
+                        "2. Understanding the Condition: Learn about the benign nature of seborrheic keratoses and the absence of medical necessity for removal unless bothersome. Recognize that new lesions can develop over time.\n\n"
+                        "3. Management of Mild Symptoms: Keep the affected area clean and avoid irritating the lesions. Use moisturizers to minimize itching.\n\n"
+                        "4. Treatment Options: Cryotherapy: Freezing the lesion with liquid nitrogen can cause it to fall off after a few days. Curettage: The doctor may scrape off the lesion using a special instrument after numbing the area. Electrosurgery: Burning off the growth with an electric current; often combined with curettage. Laser Therapy: Vaporizing the lesion using a laser beam. Topical Applications: Application of hydrogen peroxide or other agents to help reduce the appearance.\n\n",
   "tinea ringworm": "A fungal infection that causes a red, itchy, scaly circular rash on the body.",
   "normal": "No skin disease detected. Skin appears to be normal."
 };
@@ -126,7 +136,7 @@ Future<void> saveResultsToFirebase(List<dynamic>? recognitions) async {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: const Color.fromARGB(255, 32, 32, 33),
+    backgroundColor: Color.fromARGB(255, 0, 0, 64),
     appBar: AppBar(
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
@@ -136,7 +146,7 @@ Widget build(BuildContext context) {
         ),
       ),
       title: const Text('Scan Diseases', style: TextStyle(color: Colors.white)),
-      backgroundColor: Color.fromARGB(255, 99, 172, 143),
+      backgroundColor: const Color.fromARGB(255, 69, 84, 255),
     ),
     body: ListView(
       children: <Widget>[
@@ -189,14 +199,14 @@ Widget build(BuildContext context) {
   //color: Color.fromARGB(255, 156, 189, 105),
   padding: const EdgeInsets.all(8),
   child: ClipRRect(
-    borderRadius: BorderRadius.circular(16.0), // Adjust the radius value to your preference
+    borderRadius: BorderRadius.circular(16.0),
     child: Container(
-      color: Color.fromARGB(255, 156, 189, 105), // Color of the inner container
+      color: Color.fromARGB(255, 194, 199, 255),
       padding: const EdgeInsets.all(10),
       child: Text(
         description,
         style: const TextStyle(
-          color: Colors.black87,
+          color: Color.fromARGB(221, 12, 0, 118),
           fontSize: 16,
         ),
       ),

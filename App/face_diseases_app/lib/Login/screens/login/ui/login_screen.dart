@@ -108,7 +108,6 @@ import '../../../core/widgets/no_internet.dart';
 import '../../../core/widgets/sign_in_with_google_text.dart';
 import '../../../core/widgets/terms_and_conditions_text.dart';
 import '../../../helpers/google_sign_in.dart';
-import '../../../theming/colors.dart';
 import '../../../theming/styles.dart';
 import 'widgets/do_not_have_account.dart';
 
@@ -123,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 115, 212, 119),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: OfflineBuilder(
         connectivityBuilder: (
           BuildContext context,
@@ -135,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: const Center(
           child: CircularProgressIndicator(
-            color: ColorsManager.mainBlue,
+            color: Color.fromARGB(255, 0, 44, 110),
           ),
         ),
       ),

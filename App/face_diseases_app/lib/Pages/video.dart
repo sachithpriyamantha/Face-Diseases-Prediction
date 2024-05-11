@@ -47,7 +47,7 @@ class YoutubeVideoListScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('PlayList', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: Colors.lightBlue,
       ),
       body: StreamBuilder<List<YoutubeVideo>>(
         stream: _firestoreService.streamVideos(),

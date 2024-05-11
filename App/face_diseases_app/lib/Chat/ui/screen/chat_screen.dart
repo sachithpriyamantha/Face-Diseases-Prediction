@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,41 +25,36 @@ class _ChatState extends State<Chat> {
 
   final TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  
-
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-    appBar: AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 250, 250, 250)),
-        onPressed: () => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back,
+              color: Color.fromARGB(255, 250, 250, 250)),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Dashboard()),
+          ),
         ),
+        title: const Text('Group Chat', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromARGB(255, 69, 84, 255),
       ),
-      title: const Text('Group Chat', style: TextStyle(color: Colors.white)),
-      backgroundColor: Color.fromARGB(255, 99, 172, 143),
-    ),
-
-
-
-
 
       /***************************************Body****************************************************************** */
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-        
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: _messageCollectionRef.orderBy('date', descending: true).snapshots(),
+                stream: _messageCollectionRef
+                    .orderBy('date', descending: true)
+                    .snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+                  if (!snapshot.hasData)
+                    return Center(child: CircularProgressIndicator());
 
                   return ListView.builder(
                     reverse: true,
@@ -81,12 +75,6 @@ class _ChatState extends State<Chat> {
                 },
               ),
             ),
-
-
-
-
-                
-
             _buildInput(),
           ],
         ),
@@ -99,14 +87,16 @@ class _ChatState extends State<Chat> {
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       height: 50.0,
       decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+          border: Border(
+              top: BorderSide(
+                  color: const Color.fromARGB(255, 79, 79, 79), width: 0.5)),
           color: Colors.white),
       child: Row(
         children: <Widget>[
           IconButton(
             icon: Icon(Icons.image),
             onPressed: _pickImage,
-            color: Colors.blue,
+            color: Color.fromARGB(255, 30, 0, 149),
           ),
           Expanded(
             child: TextField(
@@ -120,7 +110,7 @@ class _ChatState extends State<Chat> {
           IconButton(
             icon: Icon(Icons.send),
             onPressed: () => _sendMessage(text: messageController.text),
-            color: Colors.blue,
+            color: const Color.fromARGB(255, 0, 59, 108),
           ),
         ],
       ),
@@ -151,12 +141,11 @@ class _ChatState extends State<Chat> {
 
   Future<void> _sendMessage({String? text, String? imageUrl}) async {
     final messageData = {
-    'from': widget.user.email,
-    'date': DateTime.now().toIso8601String(),
-    'status': 'sent',
-    
-    if (text?.isNotEmpty ?? false) 'text': text,
-    if (imageUrl != null) 'imageUrl': imageUrl,
+      'from': widget.user.email,
+      'date': DateTime.now().toIso8601String(),
+      'status': 'sent',
+      if (text?.isNotEmpty ?? false) 'text': text,
+      if (imageUrl != null) 'imageUrl': imageUrl,
     };
 
     await _messageCollectionRef.add(messageData);

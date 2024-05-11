@@ -82,7 +82,7 @@ class _ListViewPageState extends State<ListViewPage> {
           'Face Diseases',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: const Color.fromARGB(255, 69, 84, 255),
       ),
 
       /**********************************************Body*************************************************/
@@ -97,7 +97,7 @@ class _ListViewPageState extends State<ListViewPage> {
             },
           
             child: Card(
-              color: Color.fromARGB(255, 214, 221, 234),
+              color: Color.fromARGB(255, 224, 226, 250),
               child: Row(
                 children: <Widget>[
                   Container(
@@ -115,7 +115,7 @@ class _ListViewPageState extends State<ListViewPage> {
                           titleList[index],
                           style: TextStyle(
                             fontSize: 25,
-                            color: Color.fromARGB(168, 255, 6, 6),
+                            color: Color.fromARGB(255, 6, 10, 255),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

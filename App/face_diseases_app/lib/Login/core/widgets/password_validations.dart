@@ -49,7 +49,7 @@ class PasswordValidations extends StatelessWidget {
           text,
           style: TextStyles.font14DarkBlue500Weight.copyWith(
             decoration: hasValidated ? TextDecoration.lineThrough : null,
-            decorationColor: Colors.green,
+            decorationColor: Color.fromARGB(255, 162, 0, 0),
             decorationThickness: 2,
             color: hasValidated ? ColorsManager.gray : ColorsManager.darkBlue,
           ),

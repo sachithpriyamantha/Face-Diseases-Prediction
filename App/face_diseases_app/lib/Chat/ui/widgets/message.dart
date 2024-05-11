@@ -21,8 +21,8 @@ class Message extends StatelessWidget {
     
     
 
-    Color backgroundColor = me ? Colors.lightBlueAccent : Colors.grey[300]!;
-    Color textColor = me ? Colors.white : Colors.black;
+    Color backgroundColor = me ? Color.fromARGB(255, 151, 229, 255) : Color.fromARGB(255, 230, 223, 255);
+    Color textColor = me ? Color.fromARGB(255, 0, 0, 0) : Color.fromARGB(255, 0, 0, 0);
 
     return Align(
     
@@ -39,7 +39,7 @@ class Message extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), 
+              offset: Offset(0, 3),
             ),
           ],
         ),

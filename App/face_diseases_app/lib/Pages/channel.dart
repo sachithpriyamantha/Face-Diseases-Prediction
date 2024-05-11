@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard())),
         ),
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: const Color.fromARGB(255, 69, 84, 255),
         title: Container(
           height: 38,
           child: TextField(
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 253, 253, 253),
+            color: Color.fromARGB(255, 239, 242, 255),
           /*gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
@@ -150,12 +150,12 @@ class _HomePageState extends State<HomePage> {
               height: 35,
               width: 110,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 99, 172, 143),
+                color: Color.fromARGB(255, 14, 14, 237),
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.transparent),
               ),
               child: const Center(
-                child: Text('Info', style: TextStyle(color: Colors.white)),
+                child: Text('Info', style: TextStyle(fontWeight:FontWeight.bold, color:  Colors.white)),
               ),
             ),
           ),

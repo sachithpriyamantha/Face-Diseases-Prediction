@@ -147,7 +147,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
           ),
         ),
         title: const Text('Feedback', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: const Color.fromARGB(255, 69, 84, 255),
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -180,7 +180,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                       var data = feedbackData.data() as Map<String, dynamic>;
 
                       return Card(
-                        color: Color.fromARGB(255, 57, 129, 100),
+                        color: Color.fromARGB(255, 170, 163, 201),
                         margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -195,7 +195,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14.0,
-                                      color: const Color.fromARGB(255, 247, 249, 251),
+                                      color: Color.fromARGB(255, 2, 39, 76),
                                     ),
                                   ),
                                   Text(
@@ -204,7 +204,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                                         .toLocal()
                                         .toString(),
                                     style: TextStyle(
-                                      color: Color.fromARGB(255, 211, 207, 207),
+                                      color: Color.fromARGB(255, 3, 3, 3),
                                       fontSize: 10.0,
                                     ),
                                   ),
@@ -215,7 +215,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                                 data['feedback'] ?? 'No feedback',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: const Color.fromARGB(255, 234, 228, 228),
+                                  color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                               SizedBox(height: 4.0),
@@ -225,7 +225,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                                     'Rating: ',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: const Color.fromARGB(255, 251, 233, 233),
+                                      color: Color.fromARGB(255, 0, 0, 0),
                                     ),
                                   ),
                                   RatingBarIndicator(
@@ -255,7 +255,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showFeedbackForm,
         child: Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: Color.fromARGB(255, 99, 153, 172),
       ),
     );
   }

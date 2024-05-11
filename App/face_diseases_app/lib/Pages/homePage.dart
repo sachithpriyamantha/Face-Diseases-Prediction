@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                     : AssetImage('image/profile.png') as ImageProvider,
               ),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 99, 172, 143),
+                color: Color.fromARGB(255, 69, 84, 255),
               ),
             ),
             ListTile(
@@ -90,19 +90,36 @@ class _HomePageState extends State<HomePage> {
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: Colors.transparent,
-        color: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: Color.fromARGB(0, 236, 10, 10),
+        color: Color.fromARGB(255, 69, 84, 255),
         animationDuration: Duration(milliseconds: 300),
         height: 60,
         items: <Widget>[
-          Icon(Icons.home_outlined, size: 30),
-          Icon(Icons.dashboard_customize_outlined, size: 30),
+          Icon(
+            Icons.home_outlined,
+            size: 30,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
+          Icon(
+            Icons.dashboard_customize_outlined,
+            size: 30,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
           Icon(
             Icons.add_a_photo_outlined,
             size: 30,
+            color: const Color.fromARGB(255, 255, 255, 255),
           ),
-          Icon(Icons.message_outlined, size: 30),
-          Icon(Icons.manage_accounts_outlined, size: 30),
+          Icon(
+            Icons.message_outlined,
+            size: 30,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          Icon(
+            Icons.manage_accounts_outlined,
+            size: 30,
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
         ],
         onTap: _onIconTapped,
       ),
@@ -145,32 +162,31 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> carouselItems = [
-                  {
+      {
         'image': 'image/problem.jpg',
         'text': 'Problems',
-        'color': Colors.orange,
+        //'color': Colors.orange,
       },
       {
         'image': 'image/facescan.jpg',
         'text': 'Face Diseases Scaning',
-        'color': Colors.blue,
+        //'color': Colors.blue,
       },
       {
         'image': 'image/chat.jpg',
         'text': 'A group chat to Ask Questions',
-        'color': Colors.green,
+        //'color': Colors.green,
       },
-            {
+      {
         'image': 'image/loca.jpg',
         'text': 'Nearby Hospital',
-        'color': Colors.green,
+        //'color': Colors.green,
       },
       {
         'image': 'image/videol.jpg',
         'text': 'Learn Video for Diseases',
-        'color': Colors.orange,
+        //'color': Colors.orange,
       },
-
     ];
 
     return Scaffold(
@@ -178,7 +194,7 @@ class HomeContent extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 99, 172, 143),
+              color: Color.fromARGB(255, 69, 84, 255),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -200,13 +216,13 @@ class HomeContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 255, 255, 255),
                             shadows: [
-                              Shadow(
+                              /*Shadow(
                                 offset: Offset(3.0, 3.0),
                                 blurRadius: 3.0,
                                 color: Colors.black.withOpacity(0.5),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
@@ -216,13 +232,13 @@ class HomeContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 244, 238, 54),
+                            color: Color.fromARGB(255, 255, 255, 255),
                             shadows: [
-                              Shadow(
+                              /*Shadow(
                                 offset: Offset(3.0, 3.0),
                                 blurRadius: 3.0,
-                                color: Colors.black.withOpacity(0.5),
-                              ),
+                                color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
+                              ),*/
                             ],
                           ),
                         ),
@@ -231,13 +247,13 @@ class HomeContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 255, 255, 255),
                             shadows: [
-                              Shadow(
+                              /*Shadow(
                                 offset: Offset(4.0, 4.0),
                                 blurRadius: 3.0,
                                 color: Colors.black.withOpacity(0.5),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
@@ -249,14 +265,9 @@ class HomeContent extends StatelessWidget {
               ],
             ),
           ),
-
-
-
-
-
-
           Expanded(
-            /*child: ListView(
+            
+            child: ListView(
               padding: EdgeInsets.only(top: 20),
               children: <Widget>[
                 _buildSectionHeader(context, 'Empower Yourself'),
@@ -266,29 +277,47 @@ class HomeContent extends StatelessWidget {
                     itemCount: carouselItems.length,
                     itemBuilder: (context, index, realIndex) {
                       final item = carouselItems[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: item['color'],
-                          borderRadius: BorderRadius.circular(15.0),
-                          image: DecorationImage(
-                            image: AssetImage(item['image']),
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.3),
-                              BlendMode.darken,
+                      return Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: item['color'],
+                              borderRadius: BorderRadius.circular(15.0),
+                              image: DecorationImage(
+                                image: AssetImage(item['image']),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Color.fromARGB(255, 69, 84, 255)
+                                      .withOpacity(0.1),
+                                  BlendMode.darken,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            item['text'],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            right: 10,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 1.0, horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 69, 84, 255)
+                                    .withOpacity(0.9),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Text(
+                                item['text'],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       );
                     },
                     options: CarouselOptions(
@@ -304,72 +333,7 @@ class HomeContent extends StatelessWidget {
                 _buildSectionHeader(context, 'Popular News'),
                 _buildPopularNews(context),
               ],
-            ),*/
-            child: ListView(
-  padding: EdgeInsets.only(top: 20),
-  children: <Widget>[
-    _buildSectionHeader(context, 'Empower Yourself'),
-    SizedBox(
-      height: 150,
-      child: CarouselSlider.builder(
-        itemCount: carouselItems.length,
-        itemBuilder: (context, index, realIndex) {
-          final item = carouselItems[index];
-          return Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: item['color'],
-                  borderRadius: BorderRadius.circular(15.0),
-                  image: DecorationImage(
-                    image: AssetImage(item['image']),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.3),
-                      BlendMode.darken,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                right: 10,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 10.0),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 58, 57, 57).withOpacity(0.6),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Text(
-                    item['text'],
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-        options: CarouselOptions(
-          autoPlay: true,
-          enlargeCenterPage: true,
-          viewportFraction: 0.8,
-          aspectRatio: 2.0,
-        ),
-      ),
-    ),
-    _buildSectionHeader(context, 'Doctors'),
-    _buildNearbyDoctorsList(context),
-    _buildSectionHeader(context, 'Popular News'),
-    _buildPopularNews(context),
-  ],
-),
-
+            ),
           ),
         ],
       ),
@@ -451,7 +415,7 @@ class HomeContent extends StatelessWidget {
         'title': 'Healthcare Advances',
         'description':
             'Recent advancements in healthcare could change the way diseases are treated.',
-        'imageUrl': 'https://via.placeholder.com/150'
+        'imageUrl': 'https://dm1zcrsul8wju.cloudfront.net/sites/rcn_nspace/files/styles/ckeditor_image_style/public/handwashingcjv_26.jpg?itok=OWlRcFBk'
       },
     ];
 
@@ -459,8 +423,9 @@ class HomeContent extends StatelessWidget {
       children: newsItems.map((item) {
         return Container(
           margin: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 195, 240, 219),
+            color: Color.fromARGB(255, 195, 200, 255),
             borderRadius: BorderRadius.circular(15.0),
             boxShadow: [
               BoxShadow(
@@ -496,7 +461,7 @@ class HomeContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.menu, color: Colors.white),
+              icon: Icon(Icons.menu, color: Color.fromARGB(255, 255, 255, 255)),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
             CircleAvatar(

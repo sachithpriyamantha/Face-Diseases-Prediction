@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('About', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 99, 172, 143),
+        backgroundColor: Color.fromARGB(255, 69, 84, 255),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -19,9 +19,9 @@ class AboutPage extends StatelessWidget {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                Color.fromARGB(255, 114, 228, 215),
-                Color.fromARGB(255, 197, 232, 93),
-                Color.fromARGB(255, 114, 228, 215),
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(191, 70, 112, 211),
+                Color.fromARGB(255, 255, 255, 255),
               ],
             ),
           ),
@@ -31,15 +31,15 @@ class AboutPage extends StatelessWidget {
             children: <Widget>[
               buildImageSection(),
               SizedBox(height: 20),
-              buildTitleSection('About Us', Color.fromARGB(255, 212, 80, 80)),
+              buildTitleSection('About Us', Color.fromARGB(255, 0, 0, 0)),
               SizedBox(height: 10),
               buildParagraphSection('Welcome to Face Diseases Prediction System, a dedicated platform committed to raising awareness, providing support, and fostering understanding about facial diseases. Our mission is to empower individuals affected by facial conditions, as well as their families and caregivers, by offering reliable information, resources, and a supportive community.'),
               SizedBox(height: 20),
-              buildTitleSection('Our Vision', Color.fromARGB(255, 212, 80, 80)),
+              buildTitleSection('Our Vision', Color.fromARGB(255, 0, 1, 33)),
               SizedBox(height: 10),
               buildParagraphSection('At Face Diseases Prediction System, we envision a world where individuals facing facial diseases can live life to the fullest, free from stigma and with access to the necessary support and resources for their unique journey.'),
               SizedBox(height: 20),
-              buildTitleSection('Our Mission', Color.fromARGB(255, 212, 80, 80)),
+              buildTitleSection('Our Mission', Color.fromARGB(255, 0, 0, 0)),
               SizedBox(height: 10),
               buildMissionDetails(),
               SizedBox(height: 20),
@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
         child: Image.asset(
-          'image/aboutus.png',
+          'image/sachiogo.png',
           width: 100.0,
           height: 100.0,
           fit: BoxFit.cover,
@@ -112,7 +112,7 @@ class AboutPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 212, 80, 80),
+            color: Color.fromARGB(255, 37, 0, 219),
           ),
         ),
         SizedBox(height: 10),
