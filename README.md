@@ -20,8 +20,6 @@ affecting their face. When we consider the risk of this problem, most of the peo
 -  **Admin**
 
 
-## Getting Started
-
 ### Prerequisites
 Before you start, ensure your device runs Android or iOS with the latest operating system. Also, ensure a stable internet connection for optimal app performance.
 
@@ -31,6 +29,19 @@ Before you start, ensure your device runs Android or iOS with the latest operati
 - Machine learning models for gesture and speech recognition
 - Firebase for backend operations
 - Admin Panel Using Flutter Web
+
+## Mobile UI
+![Screenshot 2024-05-11 193938](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/bab07aa4-af14-4d8e-bccb-b625b91eb3a3) 
+![Screenshot 2024-05-11 194001](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/6df89f55-ae3d-4b6b-8ae5-b90b8caf86a9)
+![Screenshot 2024-05-11 194046](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/5add9a15-4bfd-423e-93fb-b6167b8c8d2b)
+![Screenshot 2024-05-11 194057](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/59181b40-f37c-4ac9-81ef-e78595d423b2)
+![Screenshot 2024-05-11 194132](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/67dfbe62-95c4-44c8-b475-86a6f5776640)
+![Screenshot 2024-05-11 194154](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/c10c6a59-edb2-421b-875e-8158ad11e2b2)
+![Screenshot 2024-05-11 194211](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/60619e89-106e-45e9-996f-361954bc47cc)
+![Screenshot 2024-05-11 194225](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/2b4531c0-8696-45a5-930a-064f4ccbb95a)
+![Screenshot 2024-05-11 194243](https://github.com/sachithpriyamantha/Face-Diseases-Prediction/assets/89736781/c2d98494-c183-46ac-ae88-d81c275c9258)
+
+
 
 ## Contributing
 Contributions to FaceGardian are highly appreciated. If you have any suggestions or encounter any issues, please open an issue on our GitHub repository. For significant updates or additions, please fork the repository and submit a pull request for review.
