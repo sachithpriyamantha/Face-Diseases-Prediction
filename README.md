@@ -26,7 +26,7 @@ Before you start, ensure your device runs Android or iOS with the latest operati
 
 ## Technologies Used
 - Flutter for mobile application development
-- Machine learning models for gesture and speech recognition
+- Machine learning models for CNN Algorithm
 - Firebase for backend operations
 - Admin Panel Using Flutter Web
 
